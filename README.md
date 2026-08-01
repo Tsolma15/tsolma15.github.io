@@ -37,3 +37,8 @@ Réalisé par **Timéo Deversin**, futur Technicien Systèmes et Réseaux
 - 🌐 Portfolio : [tsolma15.github.io](https://tsolma15.github.io/)
 - 💼 LinkedIn : [Timéo Deversin](https://www.linkedin.com/in/tim%C3%A9o-deversin-05393a368/)
 - ✉️ timeo.deversin15@gmail.com
+
+## Crédits
+
+Conception et code par Timéo Deversin. Les traductions **anglaise** et
+**italienne** de l'interface ont été réalisées avec l'aide de Claude (Anthropic).
