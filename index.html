@@ -1,0 +1,2633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="d1UYbr4gaUSvlxA-amLcKyGe7e4YeFNHq8i0qCMFQ8o" />
+<title>Timéo OS — Portfolio d'un futur Technicien Systèmes et Réseaux</title>
+<meta name="description" content="Portfolio de Timéo, futur Technicien Systèmes et Réseaux (Titre Pro RNCP, iSCOD) en alternance, secteur PACA / Côte d'Azur. Faux bureau Windows rétro en un seul fichier HTML.">
+<meta name="author" content="Timéo Deversin">
+<link rel="canonical" href="https://tsolma15.github.io/">
+<meta name="theme-color" content="#3a6ea5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='2' y='3' width='6' height='5' fill='%23e02020'/%3E%3Crect x='9' y='3' width='5' height='5' fill='%2343a047'/%3E%3Crect x='2' y='9' width='6' height='5' fill='%231e6fd9'/%3E%3Crect x='9' y='9' width='5' height='5' fill='%23f2b21b'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Timéo OS">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="it_IT">
+<meta property="og:title" content="Timéo OS — Portfolio">
+<meta property="og:description" content="Un faux bureau Windows rétro fait main en un seul fichier HTML : projets réseau, CV et secrets à trouver.">
+<meta property="og:url" content="https://tsolma15.github.io/">
+<meta property="og:image" content="https://tsolma15.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="Le bureau rétro « Timéo OS », un faux Windows fait en un seul fichier HTML.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Timéo OS — Portfolio">
+<meta name="twitter:description" content="Un faux bureau Windows rétro fait main en un seul fichier HTML : projets réseau, CV et secrets à trouver.">
+<meta name="twitter:image" content="https://tsolma15.github.io/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Timéo Deversin",
+  "jobTitle": "Futur Technicien Systèmes et Réseaux (Titre Professionnel RNCP)",
+  "url": "https://tsolma15.github.io/",
+  "email": "mailto:timeo.deversin15@gmail.com",
+  "sameAs": [
+    "https://github.com/Tsolma15",
+    "https://www.linkedin.com/in/tim%C3%A9o-deversin-05393a368/"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "Provence-Alpes-Côte d'Azur",
+    "addressCountry": "FR"
+  },
+  "knowsLanguage": ["fr", "it", "en", "es"]
+}
+</script>
+<!--
+  ============================================================
+  NOTE POUR MOI-MÊME : penser à supprimer /etc/motd avant la
+  mise en ligne. Il est encore lisible depuis cmd.exe
+  (que j'ai jeté à la Corbeille, mais bon, on sait jamais...)
+  ============================================================
+-->
+<style>
+  :root{
+    --desk:#3a6ea5;
+    --face:#c0c0c0;
+    --light:#ffffff;
+    --shadow:#808080;
+    --dark:#000000;
+    --title1:#000080;
+    --title2:#1084d0;
+    --paper:#ffffff;
+    --paper2:#f4f4f4;
+    --ink:#000000;
+    --accent:#000080;
+    --link:#0000ee;
+  }
+
+  body.dark{
+    --desk:#16232f;
+    --face:#4b4b4b;
+    --light:#757575;
+    --shadow:#232323;
+    --paper:#1d1d1d;
+    --paper2:#2a2a2a;
+    --ink:#e0e0e0;
+    --accent:#8fb8ff;
+    --link:#7fb2ff;
+    color:#e6e6e6;
+  }
+  body.dark button{color:#e6e6e6}
+
+  body.dys .body, body.dys .label, body.dys .task, body.dys #startmenu{
+    font-family:"Comic Sans MS","Trebuchet MS",Verdana,sans-serif;
+    letter-spacing:.04em;
+    word-spacing:.12em;
+  }
+  body.dys .body{line-height:1.95}
+
+  body.fs-s .body{font-size:11px}
+  body.fs-l .body{font-size:15px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  html,body{height:100%;overflow:hidden}
+  body{
+    background:var(--desk);
+    font-family:"Tahoma","Geneva",sans-serif;
+    font-size:12px;
+    -webkit-font-smoothing:none;
+  }
+
+  #power{
+    position:fixed;inset:0;z-index:200;background:#000;
+    display:flex;align-items:center;justify-content:center;
+    flex-direction:column;gap:22px;cursor:pointer;
+    font-family:"Consolas","Lucida Console",monospace;color:#c0c0c0;
+  }
+  #power .pbtn{
+    width:74px;height:74px;border-radius:50%;
+    border:3px solid #4a4a4a;background:#1a1a1a;
+    display:flex;align-items:center;justify-content:center;
+    font-size:30px;color:#5a9e5a;
+    box-shadow:0 0 0 0 rgba(90,158,90,.5);
+    animation:pulse 2.2s ease-out infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(90,158,90,.45)}
+    70%{box-shadow:0 0 0 22px rgba(90,158,90,0)}
+    100%{box-shadow:0 0 0 0 rgba(90,158,90,0)}
+  }
+  #power .ptxt{font-size:12px;letter-spacing:2px;color:#666}
+  #power.off{opacity:0;pointer-events:none;transition:opacity .3s}
+
+  #boot{
+    position:fixed;inset:0;z-index:100;
+    background:#000;color:#c0c0c0;
+    font-family:"Consolas","Lucida Console",monospace;
+    font-size:14px;line-height:1.45;
+    padding:18px 20px;
+    white-space:pre-wrap;
+    overflow:hidden;
+    cursor:pointer;
+    display:none;
+  }
+  #boot.on{display:block}
+  #boot .cursor{
+    display:inline-block;width:8px;height:15px;
+    background:#c0c0c0;vertical-align:-2px;
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0}}
+  #boot.done{animation:crt .5s ease forwards}
+  @keyframes crt{
+    0%{transform:scaleY(1);opacity:1}
+    60%{transform:scaleY(.02);opacity:1;filter:brightness(3)}
+    100%{transform:scaleY(0);opacity:0}
+  }
+  #skip{
+    position:fixed;bottom:14px;right:18px;
+    color:#666;font-size:11px;letter-spacing:.5px;
+  }
+
+  #desktop{position:absolute;inset:0 0 30px 0;opacity:0;transition:opacity .5s ease}
+  #desktop.on{opacity:1}
+
+  .icons{position:absolute;inset:0}
+  .icon{
+    position:absolute;
+    width:84px;padding:6px 2px;text-align:center;color:#fff;
+    cursor:pointer;user-select:none;border:1px dotted transparent;
+    opacity:0;transform:translateY(6px);touch-action:none;
+  }
+  #desktop.on .icon{animation:iconIn .3s ease forwards}
+  #desktop.on .icon:nth-child(1){animation-delay:.05s}
+  #desktop.on .icon:nth-child(2){animation-delay:.13s}
+  #desktop.on .icon:nth-child(3){animation-delay:.21s}
+  #desktop.on .icon:nth-child(4){animation-delay:.29s}
+  #desktop.on .icon:nth-child(5){animation-delay:.37s}
+  #desktop.on .icon:nth-child(6){animation-delay:.45s}
+  #desktop.on .icon:nth-child(7){animation-delay:.53s}
+  #desktop.on .icon:nth-child(8){animation-delay:.61s}
+  #desktop.on .icon:nth-child(9){animation-delay:.69s}
+  #desktop.on .icon:nth-child(10){animation-delay:.77s}
+  @keyframes iconIn{to{opacity:1;transform:translateY(0)}}
+  .icon:focus{outline:none;border-color:#fff;background:rgba(0,0,128,.4)}
+  .icon svg{
+    width:32px;height:32px;display:block;margin:0 auto 5px;
+    image-rendering:pixelated;shape-rendering:crispEdges;
+  }
+  .icon .label{text-shadow:1px 1px 0 #000;font-size:11px;display:block;word-break:break-word;padding:1px 2px}
+  .icon.sel .label{background:var(--title1)}
+  .icon.sel svg{filter:drop-shadow(0 0 0 #000080) saturate(.6) brightness(.85)}
+
+  .win{
+    position:absolute;
+    background:var(--face);
+    border:2px solid;
+    border-color:var(--light) var(--dark) var(--dark) var(--light);
+    box-shadow:1px 1px 0 var(--shadow) inset;
+    display:none;flex-direction:column;
+    min-width:260px;
+  }
+  .win.open{display:flex;animation:winOpen .16s ease-out}
+  .win.closing{animation:winClose .14s ease-in forwards}
+  @keyframes winOpen{
+    from{opacity:.4;transform:scale(.85) translateY(14px)}
+    to{opacity:1;transform:scale(1) translateY(0)}
+  }
+  @keyframes winClose{
+    from{opacity:1;transform:scale(1)}
+    to{opacity:0;transform:scale(.85) translateY(14px)}
+  }
+  .titlebar{
+    background:linear-gradient(90deg,var(--title1),var(--title2));
+    color:#fff;font-weight:bold;font-size:12px;
+    padding:3px 4px;display:flex;align-items:center;gap:6px;
+    cursor:move;user-select:none;touch-action:none;
+  }
+  .titlebar svg{width:15px;height:15px;flex:none;image-rendering:pixelated;shape-rendering:crispEdges}
+  .titlebar .t{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tbtn{
+    width:17px;height:15px;background:var(--face);
+    border:1px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+    color:#000;font:bold 10px/1 Tahoma;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .tbtn:active{border-color:var(--dark) var(--light) var(--light) var(--dark)}
+  .menubar{
+    border-bottom:1px solid var(--shadow);padding:2px 4px;display:flex;gap:2px;
+    font-size:11px;position:relative;
+  }
+  .menubar > span{padding:1px 7px;cursor:pointer}
+  .menubar > span:hover, .menubar > span.open{background:var(--title1);color:#fff}
+  .dropdown{
+    position:absolute;top:100%;z-index:99;min-width:190px;display:none;
+    background:var(--face);
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+    padding:2px;
+  }
+  .dropdown.on{display:block;animation:menuIn .1s ease-out}
+  .dropdown div{padding:4px 10px 4px 24px;cursor:pointer;position:relative;white-space:nowrap}
+  .dropdown div:hover{background:var(--title1);color:#fff}
+  .dropdown div.checked::before{content:"✓";position:absolute;left:7px}
+  .dropdown hr{border:none;border-top:1px solid var(--shadow);border-bottom:1px solid var(--light);margin:3px 2px}
+  .body{
+    background:var(--paper);color:var(--ink);margin:3px;padding:12px 14px;
+    border:1px solid;border-color:var(--shadow) var(--light) var(--light) var(--shadow);
+    overflow:auto;flex:1;line-height:1.6;
+  }
+  .body h2{font-size:15px;margin-bottom:6px;color:var(--accent)}
+  .body h3{font-size:12px;margin:12px 0 3px}
+  .body p{margin-bottom:9px}
+  .body ul{margin:0 0 10px 18px}
+  .body li{margin-bottom:3px}
+  .body a{color:var(--link)}
+  hr{border:none;border-top:1px solid var(--shadow);margin:10px 0}
+  .proj{
+    border:1px solid var(--shadow);padding:8px 10px;margin-bottom:8px;background:var(--paper2);
+    opacity:0;transform:translateX(-8px);
+  }
+  .win.open .proj{animation:rowIn .26s ease forwards}
+  .win.open .proj:nth-child(2){animation-delay:.04s}
+  .win.open .proj:nth-child(3){animation-delay:.09s}
+  .win.open .proj:nth-child(4){animation-delay:.14s}
+  .win.open .proj:nth-child(5){animation-delay:.19s}
+  .win.open .proj:nth-child(6){animation-delay:.24s}
+  @keyframes rowIn{to{opacity:1;transform:translateX(0)}}
+  .proj b{color:var(--accent)}
+  .tag{
+    display:inline-block;background:var(--face);border:1px solid;
+    border-color:var(--light) var(--shadow) var(--shadow) var(--light);
+    padding:0 5px;margin:3px 3px 0 0;font-size:10px;
+  }
+
+  #taskbar{
+    position:fixed;bottom:0;left:0;right:0;height:30px;
+    background:var(--face);
+    border-top:2px solid var(--light);
+    display:flex;align-items:center;gap:4px;padding:2px 4px;
+    z-index:50;transform:translateY(30px);transition:transform .3s ease .35s;
+  }
+  #taskbar.on{transform:translateY(0)}
+  #start{
+    font-weight:bold;padding:3px 9px 3px 6px;
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+    background:var(--face);cursor:pointer;display:flex;align-items:center;gap:5px;
+  }
+  #start:active{border-color:var(--dark) var(--light) var(--light) var(--dark)}
+  #start svg{width:15px;height:15px;image-rendering:pixelated;shape-rendering:crispEdges}
+  .tasks{flex:1;display:flex;gap:3px;overflow:hidden}
+  .task{
+    min-width:110px;max-width:150px;padding:3px 8px;text-align:left;
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+    background:var(--face);cursor:pointer;font-size:11px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    animation:taskIn .15s ease;
+  }
+  @keyframes taskIn{from{opacity:0;transform:scaleX(.6)}to{opacity:1;transform:scaleX(1)}}
+  .task.active{border-color:var(--dark) var(--light) var(--light) var(--dark);font-weight:bold}
+  .task.tsel{background:var(--title1);color:#fff}
+  #clock{
+    border:1px solid;border-color:var(--shadow) var(--light) var(--light) var(--shadow);
+    padding:3px 9px;font-size:11px;
+  }
+  #mute{
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+    background:var(--face);cursor:pointer;padding:2px 6px;font-size:11px;
+  }
+  #mute:active{border-color:var(--dark) var(--light) var(--light) var(--dark)}
+  #wswitch{
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+    background:var(--face);cursor:pointer;padding:2px 7px;font-size:12px;
+  }
+  #wswitch:active{border-color:var(--dark) var(--light) var(--light) var(--dark)}
+
+  #startmenu{
+    position:fixed;bottom:30px;left:4px;width:210px;z-index:60;display:none;
+    background:var(--face);
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+    padding:2px;
+  }
+  #startmenu.on{display:block;animation:menuIn .12s ease-out}
+  @keyframes menuIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  #startmenu div{padding:6px 10px;cursor:pointer;display:flex;gap:8px;align-items:center}
+  #startmenu div:hover{background:var(--title1);color:#fff}
+  #startmenu svg{width:16px;height:16px;image-rendering:pixelated;shape-rendering:crispEdges}
+  #startmenu hr{border:none;border-top:1px solid var(--shadow);border-bottom:1px solid var(--light);margin:3px 2px}
+  #sm-shutdown{font-weight:bold}
+
+  .tag{cursor:pointer}
+  .tag:hover{background:#000080;color:#fff}
+  .tag:active{border-color:var(--shadow) var(--light) var(--light) var(--shadow)}
+
+  #ms-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+  #ms-top{
+    display:flex;justify-content:space-between;align-items:center;width:100%;
+    background:var(--face);padding:5px 8px;
+    border:2px solid;border-color:var(--shadow) var(--light) var(--light) var(--shadow);
+  }
+  .ms-lcd{
+    background:#000;color:#f00;font-family:"Consolas",monospace;
+    font-size:18px;font-weight:bold;padding:1px 6px;min-width:52px;text-align:center;
+    border:1px solid;border-color:var(--shadow) var(--light) var(--light) var(--shadow);
+  }
+  #ms-face{
+    width:30px;height:30px;font-size:17px;cursor:pointer;background:var(--face);
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+  }
+  #ms-face:active{border-color:var(--dark) var(--light) var(--light) var(--dark)}
+  #ms-grid{
+    display:grid;gap:0;
+    border:3px solid;border-color:var(--shadow) var(--light) var(--light) var(--shadow);
+  }
+  .ms-c{
+    width:26px;height:26px;font:bold 14px/1 Tahoma;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--face);cursor:pointer;user-select:none;
+    border:2px solid;border-color:var(--light) var(--shadow) var(--shadow) var(--light);
+  }
+  .ms-c.open{border:1px solid var(--shadow);background:#d4d4d4;cursor:default}
+  .ms-c.boom{background:#f00}
+  .ms-c[data-n="1"]{color:#0000ff}.ms-c[data-n="2"]{color:#008000}
+  .ms-c[data-n="3"]{color:#ff0000}.ms-c[data-n="4"]{color:#000080}
+  .ms-c[data-n="5"]{color:#800000}.ms-c[data-n="6"]{color:#008080}
+  .ms-c[data-n="7"]{color:#000}.ms-c[data-n="8"]{color:#808080}
+  #ms-flagmode{
+    padding:4px 10px;background:var(--face);cursor:pointer;font-size:12px;
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+  }
+  #ms-flagmode.on{border-color:var(--dark) var(--light) var(--light) var(--dark);background:#ffe9a8}
+
+  #toast{
+    position:fixed;right:66px;bottom:44px;z-index:65;max-width:260px;display:none;
+    background:#ffffe1;color:#000;border:1px solid #000;border-radius:6px;
+    padding:9px 26px 9px 11px;font-size:11.5px;line-height:1.5;
+    box-shadow:2px 2px 0 rgba(0,0,0,.3);
+  }
+  #toast.on{display:block;animation:toastIn .25s ease-out}
+  @keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  #toast::after{
+    content:"";position:absolute;right:22px;bottom:-8px;
+    border:8px solid transparent;border-top-color:#ffffe1;border-bottom:none;
+  }
+  #toast::before{
+    content:"";position:absolute;right:21px;bottom:-9px;
+    border:9px solid transparent;border-top-color:#000;border-bottom:none;
+  }
+  #toast b{display:block;margin-bottom:2px}
+  #toast-x{
+    position:absolute;top:4px;right:5px;cursor:pointer;
+    font:bold 10px/1 Tahoma;padding:2px 4px;
+  }
+  #toast-x:hover{background:#000;color:#ffffe1}
+
+  #ssaver{position:fixed;inset:0;z-index:300;background:#000;display:none;cursor:none;overflow:hidden}
+  #ssaver.on{display:block}
+  #ss-logo{
+    position:absolute;font:bold 34px "Consolas",monospace;color:#0f0;
+    padding:12px 22px;border:3px solid currentColor;user-select:none;
+  }
+
+  #bsod{
+    position:fixed;inset:0;z-index:400;background:#0000aa;color:#fff;display:none;
+    font-family:"Consolas","Lucida Console",monospace;font-size:15px;line-height:1.7;
+    padding:9vh 10vw;white-space:pre-wrap;
+  }
+  #bsod.on{display:block}
+  #bsod .hd{background:#aaa;color:#0000aa;padding:0 10px;display:inline-block;margin-bottom:26px}
+
+  #clippy{
+    position:fixed;right:14px;bottom:92px;z-index:70;width:250px;display:none;
+    background:#ffffcc;color:#000;border:1px solid #000;border-radius:8px;
+    padding:10px 12px;font-size:12px;line-height:1.5;
+    box-shadow:3px 3px 0 rgba(0,0,0,.35);
+  }
+  #clippy.on{display:block;animation:menuIn .2s ease-out}
+  #clippy::after{
+    content:"";position:absolute;right:16px;bottom:-9px;
+    border:9px solid transparent;border-top-color:#ffffcc;border-bottom:none;
+  }
+  .clippy-opt{
+    display:block;width:100%;text-align:left;margin-top:5px;padding:3px 8px;
+    background:var(--face);cursor:pointer;font:inherit;font-size:11.5px;
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+  }
+  .clippy-opt:active{border-color:var(--dark) var(--light) var(--light) var(--dark)}
+  #clippy-mini{
+    position:fixed;right:14px;bottom:40px;z-index:69;display:none;
+    width:44px;height:44px;font-size:26px;cursor:pointer;
+    background:var(--face);
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+    align-items:center;justify-content:center;
+  }
+  #clippy-mini.on{display:flex;animation:menuIn .2s ease-out}
+  #clippy-mini:active{border-color:var(--dark) var(--light) var(--light) var(--dark)}
+
+  #term-body{
+    background:#000!important;color:#c0c0c0!important;
+    font-family:"Consolas","Lucida Console",monospace;font-size:13px;
+  }
+  #term-out{white-space:pre-wrap;word-break:break-word}
+  #term-line{display:flex;gap:6px}
+  #term-in{
+    flex:1;background:transparent;border:none;outline:none;
+    color:#c0c0c0;font:inherit;
+  }
+
+  .virus{color:#f00;font-weight:bold;animation:blink 0.5s steps(1) infinite}
+
+  .fake-file{padding:4px 6px;cursor:default}
+  .fake-file:hover{background:var(--title1);color:#fff}
+  .fake-file.exec{cursor:pointer;text-decoration:underline}
+
+  #admin-pass{
+    font:inherit;padding:3px 6px;border:2px solid;
+    border-color:var(--shadow) var(--light) var(--light) var(--shadow);
+    background:var(--paper);color:var(--ink);
+  }
+  #admin-btn{
+    padding:3px 12px;background:var(--face);cursor:pointer;font:inherit;
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+  }
+  #admin-btn:active{border-color:var(--dark) var(--light) var(--light) var(--dark)}
+  #ms-taunt{font-size:11px;color:var(--accent);min-height:14px;text-align:center}
+
+  @media (max-width:640px){
+    .win{left:2vw!important;top:6vh!important;width:96vw!important;height:74vh!important}
+    .icon{width:76px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .icon,.proj{opacity:1!important;transform:none!important}
+    #taskbar{transform:none!important}
+  }
+
+  @media print{
+    html,body{height:auto;overflow:visible;background:#fff}
+    #power,#boot,#taskbar,#startmenu,#ssaver,#bsod,#toast,#clippy,#clippy-mini,.icons{display:none!important}
+    #desktop{position:static;inset:auto;opacity:1!important}
+    .win{display:none!important}
+    #cv{display:block!important;position:static!important;inset:auto!important;
+        width:auto!important;height:auto!important;min-width:0!important;
+        border:none!important;box-shadow:none!important;background:#fff!important}
+    #cv .titlebar,#cv .menubar{display:none!important}
+    #cv .body{border:none!important;margin:0!important;padding:0!important;
+        overflow:visible!important;flex:none!important;color:#000!important;background:#fff!important}
+    #cv .body a{color:#000!important;text-decoration:none}
+  }
+
+  #rubber{
+    position:fixed;z-index:5;display:none;pointer-events:none;
+    border:1px solid #cfe0ff;background:rgba(120,170,255,.28);
+  }
+
+  .ctx{
+    position:fixed;z-index:80;display:none;min-width:190px;
+    background:var(--face);
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+    padding:2px;
+  }
+  .ctx.on{display:block;animation:menuIn .1s ease-out}
+  .ctx div{padding:5px 12px;cursor:pointer;white-space:nowrap;font-size:12px}
+  .ctx div:hover{background:var(--title1);color:#fff}
+  .ctx hr{border:none;border-top:1px solid var(--shadow);border-bottom:1px solid var(--light);margin:3px 2px}
+
+  #taskmgr .body{padding:6px;display:flex;flex-direction:column}
+  .tm-row{
+    display:grid;grid-template-columns:1fr 66px 44px 78px;gap:4px;
+    padding:3px 6px;font-size:11px;align-items:center;
+  }
+  .tm-row span:not(.tm-name){text-align:right;font-variant-numeric:tabular-nums}
+  .tm-head{font-weight:bold;background:var(--face);border-bottom:1px solid var(--shadow)}
+  #tm-list{
+    flex:1;overflow:auto;background:var(--paper);
+    border:1px solid;border-color:var(--shadow) var(--light) var(--light) var(--shadow);
+  }
+  .tm-row.proc{cursor:pointer}
+  .tm-row.proc:hover{background:var(--paper2)}
+  .tm-row.sel{background:var(--title1);color:#fff}
+  .tm-name{display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tm-name svg{width:14px;height:14px;flex:none;image-rendering:pixelated;shape-rendering:crispEdges}
+  #tm-foot{display:flex;gap:14px;padding:7px 2px 3px;font-size:11px}
+  .tm-gauge{flex:1;display:flex;align-items:center;gap:6px}
+  .tm-gauge i{flex:1;height:11px;display:block;background:var(--paper);border:1px solid var(--shadow)}
+  .tm-gauge b{display:block;height:100%;width:0;background:linear-gradient(#5be05b,#1a9a1a)}
+  #tm-actions{display:flex;justify-content:flex-end;padding-top:6px}
+  #tm-end{
+    padding:3px 12px;background:var(--face);cursor:pointer;font:inherit;font-size:12px;
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+  }
+  #tm-end:active{border-color:var(--dark) var(--light) var(--light) var(--dark)}
+
+  .win.max{left:0!important;top:0!important;width:100vw!important;height:calc(100vh - 30px)!important}
+
+  #snap{
+    position:fixed;z-index:48;display:none;pointer-events:none;
+    background:rgba(120,170,255,.32);border:2px solid #cfe0ff;
+  }
+
+  #shutdown{
+    position:fixed;inset:0;z-index:500;background:#000;display:none;
+    align-items:center;justify-content:center;flex-direction:column;gap:14px;cursor:pointer;
+    font-family:"Consolas","Lucida Console",monospace;text-align:center;padding:20px;
+  }
+  #shutdown.on{display:flex}
+  #shutdown .amber{color:#ffb000;font-size:19px;line-height:1.6;max-width:520px}
+  #shutdown .sub{color:#665500;font-size:12px;letter-spacing:1px}
+
+  #calendar{
+    position:fixed;bottom:32px;right:4px;z-index:66;width:210px;display:none;
+    background:var(--face);color:var(--ink);
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+    padding:6px;font-size:11px;
+  }
+  #calendar.on{display:block;animation:menuIn .12s ease-out}
+  #cal-head{text-align:center;font-weight:bold;margin-bottom:5px;color:var(--accent)}
+  #cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;text-align:center}
+  #cal-grid .cal-d{padding:3px 0}
+  #cal-grid .cal-w{font-weight:bold;color:var(--shadow)}
+  body.dark #cal-grid .cal-w{color:#9aa}
+  #cal-grid .cal-today{background:var(--title1);color:#fff;font-weight:bold}
+
+  #poste .body h3{margin-top:10px}
+  .drive{
+    display:flex;align-items:center;gap:10px;padding:7px 8px;margin-bottom:6px;cursor:pointer;
+    background:var(--paper2);border:1px solid var(--shadow);
+  }
+  .drive:hover{background:var(--title1);color:#fff}
+  .drive svg{width:26px;height:26px;flex:none;image-rendering:pixelated;shape-rendering:crispEdges}
+  .drive .dv{flex:1}
+  .drive .dv small{display:block;opacity:.75}
+  .drive .bar{width:96px;height:9px;background:var(--paper);border:1px solid var(--shadow);flex:none}
+  .drive .bar b{display:block;height:100%;background:linear-gradient(#5be05b,#1a9a1a)}
+  .drive .bar.full b{background:linear-gradient(#ff7a7a,#c01c1c)}
+
+  .win-resize{
+    position:absolute;right:1px;bottom:1px;width:15px;height:15px;z-index:3;
+    cursor:nwse-resize;touch-action:none;
+    background:
+      linear-gradient(135deg,transparent 42%,var(--shadow) 42%,var(--shadow) 50%,transparent 50%,transparent 62%,var(--shadow) 62%,var(--shadow) 70%,transparent 70%);
+  }
+  .win.max .win-resize{display:none}
+
+  #tray{display:flex;align-items:center;gap:1px}
+  .tray-i{
+    cursor:pointer;padding:2px 4px;font-size:12px;line-height:1;
+    border:1px solid transparent;
+  }
+  .tray-i:hover{border-color:var(--shadow) var(--light) var(--light) var(--shadow)}
+  #lang{display:flex;align-items:center;gap:1px}
+  .flag{cursor:pointer;padding:2px 3px;font-size:13px;line-height:1;filter:grayscale(.7) opacity(.6)}
+  .flag:hover{filter:none}
+  .flag.on{filter:none;background:var(--title1);border-radius:2px}
+
+  #note-area{
+    width:100%;height:100%;resize:none;border:none;outline:none;
+    background:var(--paper);color:var(--ink);
+    font-family:"Consolas","Lucida Console",monospace;font-size:13px;line-height:1.5;
+    padding:8px;
+  }
+
+  #wall-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0}
+  .wall{
+    height:44px;cursor:pointer;
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+  }
+  .wall:active{border-color:var(--dark) var(--light) var(--light) var(--dark)}
+  .wall.on{outline:2px solid var(--accent);outline-offset:1px}
+
+  #tm-tabs{display:flex;gap:2px;margin-bottom:6px}
+  #tm-tabs span{
+    padding:3px 12px;cursor:pointer;font-size:11px;
+    border:2px solid;border-color:var(--light) var(--dark) var(--dark) var(--light);
+    background:var(--face);
+  }
+  #tm-tabs span.on{border-color:var(--dark) var(--light) var(--light) var(--dark);font-weight:bold}
+  #tm-proc{display:flex;flex-direction:column;flex:1;min-height:0}
+  #tm-perf{display:none;flex-direction:column;gap:8px}
+  #taskmgr .body.perf #tm-proc{display:none}
+  #taskmgr .body.perf #tm-perf{display:flex}
+  .perf-lbl{font-size:11px}
+  .perf-lbl b{color:var(--accent);float:right}
+  #perf-cv{
+    width:100%;height:118px;background:#0a1a0a;
+    border:1px solid;border-color:var(--shadow) var(--light) var(--light) var(--shadow);
+  }
+  #perf-stats{font-size:11px;line-height:1.7}
+</style>
+</head>
+<body>
+<h1 class="sr-only">Timéo Deversin — Portfolio d'un futur Technicien Systèmes et Réseaux (alternance, région PACA / Côte d'Azur)</h1>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+
+    <symbol id="i-folder" viewBox="0 0 16 16">
+      <path d="M1 3h5l1 1h8v10H1z" fill="#000"/>
+      <path d="M2 4h4l1 1h7v8H2z" fill="#ffdf70"/>
+      <path d="M2 6h12v7H2z" fill="#ffc21e"/>
+      <path d="M2 4h4v1H2z" fill="#fff09a"/>
+      <path d="M3 12h10v1H3z" fill="#c99400"/>
+    </symbol>
+
+    <symbol id="i-user" viewBox="0 0 16 16">
+      <path d="M5 2h6v5H5z" fill="#000"/>
+      <path d="M6 3h4v4H6z" fill="#f0c090"/>
+      <path d="M6 3h4v1H6z" fill="#7a4a20"/>
+      <path d="M7 5h1v1H7zM9 5h1v1H9z" fill="#000"/>
+      <path d="M3 9h10v6H3z" fill="#000"/>
+      <path d="M4 10h8v5H4z" fill="#2e6da4"/>
+      <path d="M7 10h2v5H7z" fill="#fff"/>
+      <path d="M4 10h1v5H4z" fill="#4d8fd0"/>
+    </symbol>
+
+    <symbol id="i-doc" viewBox="0 0 16 16">
+      <path d="M3 1h8l2 2v12H3z" fill="#000"/>
+      <path d="M4 2h6v2h2v10H4z" fill="#fff"/>
+      <path d="M10 2l2 2h-2z" fill="#c0c0c0"/>
+      <path d="M5 5h6v1H5zM5 7h6v1H5zM5 9h6v1H5zM5 11h4v1H5z" fill="#4a6fa5"/>
+    </symbol>
+
+    <symbol id="i-gear" viewBox="0 0 16 16">
+      <path d="M6 1h4v2H6zM6 13h4v2H6zM1 6h2v4H1zM13 6h2v4h-2z" fill="#000"/>
+      <path d="M3 3h2v2H3zM11 3h2v2h-2zM3 11h2v2H3zM11 11h2v2h-2z" fill="#000"/>
+      <path d="M4 4h8v8H4z" fill="#000"/>
+      <path d="M5 5h6v6H5z" fill="#a8a8a8"/>
+      <path d="M5 5h6v1H5zM5 5h1v6H5z" fill="#e0e0e0"/>
+      <path d="M6 6h4v4H6z" fill="#000"/>
+      <path d="M7 7h2v2H7z" fill="#5a5a5a"/>
+    </symbol>
+
+    <symbol id="i-mail" viewBox="0 0 16 16">
+      <path d="M1 4h14v9H1z" fill="#000"/>
+      <path d="M2 5h12v7H2z" fill="#fff"/>
+      <path d="M2 5l6 5 6-5v1L8 11 2 6z" fill="#c0c0c0"/>
+      <path d="M2 5h12v1L8 11 2 6z" fill="#e8e8e8"/>
+      <path d="M2 5l6 5 6-5" fill="none" stroke="#000" stroke-width="1"/>
+    </symbol>
+
+    <symbol id="i-book" viewBox="0 0 16 16">
+      <path d="M2 2h11v12H2z" fill="#000"/>
+      <path d="M3 3h9v10H3z" fill="#7a3fb0"/>
+      <path d="M3 3h2v10H3z" fill="#5a2a88"/>
+      <path d="M6 5h5v1H6zM6 7h5v1H6zM6 9h4v1H6z" fill="#e8d8f8"/>
+      <path d="M7 3h3v3l-1.5-1L7 6z" fill="#ffd24a"/>
+    </symbol>
+
+    <symbol id="i-mine" viewBox="0 0 16 16">
+      <path d="M7 1h2v3H7zM7 12h2v3H7zM1 7h3v2H1zM12 7h3v2h-3z" fill="#000"/>
+      <path d="M3 3h2v2H3zM11 3h2v2h-2zM3 11h2v2H3zM11 11h2v2h-2z" fill="#000"/>
+      <path d="M4 4h8v8H4z" fill="#000"/>
+      <path d="M5 5h6v6H5z" fill="#2a2a2a"/>
+      <path d="M5 5h2v2H5z" fill="#9a9a9a"/>
+    </symbol>
+
+    <symbol id="i-trash" viewBox="0 0 16 16">
+      <path d="M5 1h6v2H5z" fill="#000"/>
+      <path d="M2 3h12v2H2z" fill="#000"/>
+      <path d="M3 4h10v1H3z" fill="#a8a8a8"/>
+      <path d="M3 5h10l-1 10H4z" fill="#000"/>
+      <path d="M4 6h8l-.8 8H4.8z" fill="#d8d8d8"/>
+      <path d="M6 7h1v6H6zM9 7h1v6H9z" fill="#808080"/>
+    </symbol>
+
+    <symbol id="i-warn" viewBox="0 0 16 16">
+      <path d="M3 1h8l2 2v12H3z" fill="#000"/>
+      <path d="M4 2h6v2h2v10H4z" fill="#fff"/>
+      <path d="M8 5l3.5 6h-7z" fill="#ffcc00" stroke="#000" stroke-width="1"/>
+      <path d="M7.5 7h1v2h-1zM7.5 9.6h1v1h-1z" fill="#000"/>
+    </symbol>
+
+    <symbol id="i-lock" viewBox="0 0 16 16">
+      <path d="M4 7h8v8H4z" fill="#000"/>
+      <path d="M5 8h6v6H5z" fill="#ffc21e"/>
+      <path d="M5 8h6v1H5z" fill="#fff09a"/>
+      <path d="M7 10h2v3H7z" fill="#000"/>
+      <path d="M5 3h2v4H5zM9 3h2v4H9zM5 3h6v2H5z" fill="#000"/>
+      <path d="M6 3h4v1H6zM6 4h1v3H6zM9 4h1v3H9z" fill="#9a9a9a"/>
+    </symbol>
+
+    <symbol id="i-win" viewBox="0 0 16 16">
+      <path d="M2 3h6v5H2z" fill="#e02020"/>
+      <path d="M9 3h5v5H9z" fill="#43a047"/>
+      <path d="M2 9h6v5H2z" fill="#1e6fd9"/>
+      <path d="M9 9h5v5H9z" fill="#f2b21b"/>
+    </symbol>
+    <symbol id="i-pc" viewBox="0 0 16 16">
+      <path d="M1 2h14v9H1z" fill="#000"/>
+      <path d="M2 3h12v7H2z" fill="#c0c0c0"/>
+      <path d="M3 4h10v5H3z" fill="#2e6da4"/>
+      <path d="M3 4h10v1H3z" fill="#4d8fd0"/>
+      <path d="M5 11h6v2H5z" fill="#000"/>
+      <path d="M4 13h8v2H4z" fill="#a8a8a8"/>
+      <path d="M4 13h8v1H4z" fill="#e0e0e0"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div id="power">
+  <div class="pbtn">⏻</div>
+  <div class="ptxt">APPUYER POUR DÉMARRER</div>
+</div>
+
+<div id="boot"><span id="bootout"></span><span class="cursor"></span><div id="skip">Cliquez pour passer</div></div>
+
+<div id="desktop">
+  <div class="icons">
+    <div class="icon" tabindex="0" data-win="projets"><svg><use href="#i-folder"/></svg><span class="label" data-i18n="w.projets">Projets</span></div>
+    <div class="icon" tabindex="0" data-win="qui"><svg><use href="#i-user"/></svg><span class="label" data-i18n="w.qui">Qui suis-je</span></div>
+    <div class="icon" tabindex="0" data-win="cv"><svg><use href="#i-doc"/></svg><span class="label" data-i18n="w.cv">CV</span></div>
+    <div class="icon" tabindex="0" data-win="skills"><svg><use href="#i-gear"/></svg><span class="label" data-i18n="w.skills">Compétences</span></div>
+    <div class="icon" tabindex="0" data-win="contact"><svg><use href="#i-mail"/></svg><span class="label" data-i18n="w.contact">Contact</span></div>
+    <div class="icon" tabindex="0" data-win="demineur"><svg><use href="#i-mine"/></svg><span class="label" data-i18n="w.demineur">Démineur</span></div>
+    <div class="icon" tabindex="0" data-win="virus"><svg><use href="#i-warn"/></svg><span class="label" data-i18n="lbl.virus">NE_PAS_OUVRIR.txt</span></div>
+    <div class="icon" tabindex="0" data-win="corbeille"><svg><use href="#i-trash"/></svg><span class="label" data-i18n="w.corbeille">Corbeille</span></div>
+    <div class="icon" tabindex="0" data-win="poste"><svg><use href="#i-pc"/></svg><span class="label" data-i18n="w.poste">Poste de travail</span></div>
+    <div class="icon" tabindex="0" data-win="notepad"><svg><use href="#i-doc"/></svg><span class="label" data-i18n="w.notepad">Bloc-notes</span></div>
+  </div>
+
+  <div class="win" id="projets" style="left:80px;top:50px;width:520px;height:420px">
+    <div class="titlebar"><svg><use href="#i-folder"/></svg><span class="t" data-i18n="w.projets">Projets</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"></div>
+    <div class="body" data-i18n-html="body.projets">
+      <h2>Mes projets</h2>
+      <div class="proj">
+        <b>NAS personnel</b>
+        <p>Serveur de stockage monté et administré à la maison : partage de fichiers, sauvegardes automatiques, accès distant.</p>
+        <span class="tag">Linux</span><span class="tag">RAID</span><span class="tag">SMB</span>
+      </div>
+      <div class="proj">
+        <b>Pi-hole + VPN</b>
+        <p>Filtrage DNS à l'échelle du réseau sur Raspberry Pi, couplé à un VPN pour garder l'accès à distance après le déménagement.</p>
+        <span class="tag">Raspberry Pi</span><span class="tag">DNS</span><span class="tag">WireGuard</span>
+      </div>
+      <div class="proj">
+        <b>Scanner de ports TCP</b>
+        <p>Scanner réseau codé de zéro en Python : teste une plage de ports en multithread (chevauchement des temps d'attente) et n'affiche que les ports ouverts. De quoi comprendre ce qui se passe sous le capot d'un nmap. <a href="https://github.com/Tsolma15/port-scanner" target="_blank" rel="noopener">Code source</a></p>
+        <span class="tag">Python</span><span class="tag">Sockets</span><span class="tag">Multithread</span><span class="tag">Sécurité</span>
+      </div>
+      <div class="proj">
+        <b>Analyseur de leaderboards Valorant</b>
+        <p>Site codé de zéro qui lit les classements par OCR et en sort des statistiques exploitables.</p>
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">OCR</span>
+      </div>
+      <div class="proj">
+        <b>Jeu d'horreur (Unreal Engine 5)</b>
+        <p>Projet solo construit autour d'une mécanique de lampe à dynamo : la lumière se paie en bruit.</p>
+        <span class="tag">UE5</span><span class="tag">Blueprints</span><span class="tag">Level design</span>
+      </div>
+      <div class="proj">
+        <b>PC monté sur mesure</b>
+        <p>Choix des composants, montage, câblage et optimisation thermique de ma tour actuelle.</p>
+        <span class="tag">Hardware</span><span class="tag">Montage</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="win" id="qui" style="left:150px;top:90px;width:460px;height:360px">
+    <div class="titlebar"><svg><use href="#i-user"/></svg><span class="t" data-i18n="w.qui">Qui suis-je</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"></div>
+    <div class="body" data-i18n-html="body.qui">
+      <h2>Timéo</h2>
+      <p>Diplômé du Baccalauréat Européen à l'École Européenne de Varèse, je prépare un Titre Professionnel Technicien Systèmes et Réseaux (RNCP) en alternance à <a href="https://www.iscod.fr/" target="_blank" rel="noopener">l'iSCOD</a>.</p>
+      <p>Mon objectif à long terme : devenir RSSI. En attendant, je passe mon temps libre à monter des serveurs, casser des réseaux pour comprendre comment les réparer, et coder.</p>
+      <h3>Langues</h3>
+      <ul>
+        <li>Français — langue maternelle</li>
+        <li>Italien — courant</li>
+        <li>Anglais — courant</li>
+        <li>Espagnol — bon niveau</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="win" id="cv" style="left:200px;top:70px;width:500px;height:400px">
+    <div class="titlebar"><svg><use href="#i-doc"/></svg><span class="t" data-i18n="w.cv">CV</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"></div>
+    <div class="body" data-i18n-html="body.cv">
+      <h2>Timéo — Étudiant en cybersécurité</h2>
+      <p>Recherche une alternance en administration systèmes et réseaux, secteur PACA / Côte d'Azur, dès septembre 2026.</p>
+      <p>🌐 Portfolio : <a href="https://tsolma15.github.io/">tsolma15.github.io</a> · ✉️ <a href="mailto:timeo.deversin15@gmail.com">timeo.deversin15@gmail.com</a></p>
+      <hr>
+      <h3>Formation</h3>
+      <ul>
+        <li><b>Titre Professionnel Technicien Systèmes et Réseaux</b> (RNCP, niveau 5) — <a href="https://www.iscod.fr/" target="_blank" rel="noopener">iSCOD</a>, en alternance (à partir de 2026)</li>
+        <li><b>Baccalauréat Européen</b> — École Européenne de Varèse, Italie (2025) : sciences appliquées (chimie & biologie) et informatique appliquée</li>
+      </ul>
+      <h3>Expérience</h3>
+      <ul>
+        <li><b>Stagiaire développement Python</b> — Joint Research Centre (JRC), Ispra, Italie (2022) : module de reconnaissance de panneaux de signalisation pour véhicule autonome, entraînement d'un modèle de vision par ordinateur en équipe de chercheurs.</li>
+        <li><b>Stagiaire en pharmacie</b> — Beausoleil et Pôle Sud, Nantes (2023).</li>
+        <li><b>Lidl</b> — poste à temps partiel : rythme soutenu, travail en équipe, gestion des priorités.</li>
+      </ul>
+      <h3>Langues</h3>
+      <ul>
+        <li>Français — langue maternelle</li>
+        <li>Italien — C1</li>
+        <li>Anglais — C2</li>
+        <li>Espagnol — B2</li>
+      </ul>
+      <h3>Certifications en cours</h3>
+      <ul>
+        <li>Cisco Networking Basics — Skills for All</li>
+        <li>Packet Tracer, adressage IP et découpage en sous-réseaux</li>
+      </ul>
+      <p><a href="#" id="cv-print">Imprimer / Enregistrer le CV en PDF</a></p>
+    </div>
+  </div>
+
+  <div class="win" id="skills" style="left:260px;top:110px;width:430px;height:330px">
+    <div class="titlebar"><svg><use href="#i-gear"/></svg><span class="t" data-i18n="w.skills">Compétences</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"></div>
+    <div class="body" data-i18n-html="body.skills">
+      <h2>Compétences</h2>
+      <h3>Réseau</h3>
+      <p><span class="tag">Sous-réseaux / CIDR</span><span class="tag">Packet Tracer</span><span class="tag">DNS</span><span class="tag">VPN</span><span class="tag">WireGuard</span><span class="tag">Routage</span><span class="tag">Pare-feu</span></p>
+      <h3>Systèmes</h3>
+      <p><span class="tag">Linux</span><span class="tag">Windows</span><span class="tag">Raspberry Pi</span><span class="tag">NAS</span></p>
+      <h3>Développement</h3>
+      <p><span class="tag">Python</span><span class="tag">C++</span><span class="tag">Lua</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Unreal Engine 5</span></p>
+      <h3>Hardware</h3>
+      <p><span class="tag">Montage PC</span><span class="tag">Diagnostic</span><span class="tag">Reconditionnement</span></p>
+    </div>
+  </div>
+
+  <div class="win" id="contact" style="left:320px;top:150px;width:390px;height:250px">
+    <div class="titlebar"><svg><use href="#i-mail"/></svg><span class="t" data-i18n="w.contact">Contact</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"></div>
+    <div class="body" data-i18n-html="body.contact">
+      <h2>Me contacter</h2>
+      <p>Disponible pour une alternance à partir de septembre 2026, secteur PACA / Côte d'Azur.</p>
+      <ul>
+        <li>Email — <a href="mailto:timeo.deversin15@gmail.com">timeo.deversin15@gmail.com</a></li>
+        <li>GitHub — <a href="https://github.com/Tsolma15" target="_blank" rel="noopener">github.com/Tsolma15</a></li>
+        <li>LinkedIn — <a href="https://www.linkedin.com/in/tim%C3%A9o-deversin-05393a368/" target="_blank" rel="noopener">Timéo Deversin</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  <div class="win" id="doc" style="left:180px;top:80px;width:420px;height:320px">
+    <div class="titlebar"><svg><use href="#i-book"/></svg><span class="t" id="doc-title">Aide</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"><span>Fichier</span><span>?</span></div>
+    <div class="body" id="doc-body"></div>
+  </div>
+
+  <div class="win" id="demineur" style="left:230px;top:60px;width:auto;height:auto">
+    <div class="titlebar"><svg><use href="#i-mine"/></svg><span class="t" data-i18n="w.demineur">Démineur</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"><span>Jeu</span><span>?</span></div>
+    <div class="body" style="padding:8px">
+      <div id="ms-wrap">
+        <div id="ms-top">
+          <span class="ms-lcd" id="ms-mines">010</span>
+          <button id="ms-face">🙂</button>
+          <span class="ms-lcd" id="ms-time">000</span>
+        </div>
+        <div id="ms-grid"></div>
+        <div id="ms-taunt"></div>
+        <button id="ms-flagmode">🚩 Mode drapeau : OFF</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="win" id="virus" style="left:190px;top:100px;width:380px;height:240px">
+    <div class="titlebar"><svg><use href="#i-warn"/></svg><span class="t" data-i18n="ttl.virus">NE_PAS_OUVRIR.txt — Bloc-notes</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"></div>
+    <div class="body" id="virus-body"></div>
+  </div>
+
+  <div class="win" id="corbeille" style="left:240px;top:120px;width:400px;height:280px">
+    <div class="titlebar"><svg><use href="#i-trash"/></svg><span class="t" data-i18n="w.corbeille">Corbeille</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"></div>
+    <div class="body">
+      <h2>Corbeille</h2>
+      <div class="fake-file">📄 CV_final_FINAL(2).docx</div>
+      <div class="fake-file">📄 CV_final_FINAL_vraiment(3).docx</div>
+      <div class="fake-file">📁 projet_minecraft_2019 (abandonné)</div>
+      <div class="fake-file">📄 lettre_motivation_brouillon_v12.txt</div>
+      <div class="fake-file exec" id="open-term">⬛ cmd.exe <i>(cliquer pour restaurer)</i></div>
+      <div class="fake-file">📄 idees_de_sites_geniales.txt (0 octet)</div>
+    </div>
+  </div>
+
+  <div class="win" id="terminal" style="left:160px;top:80px;width:520px;height:340px">
+    <div class="titlebar"><span style="font-family:monospace">C:\_</span><span class="t" data-i18n="w.terminal">Invite de commandes</span><button class="tbtn" data-close>✕</button></div>
+    <div class="body" id="term-body">
+      <div id="term-out">Microsoft Windows [Version Timéo 1.0]
+Tapez "help" pour la liste des commandes.
+</div>
+      <div id="term-line"><span>C:\Users\Invite&gt;</span><input id="term-in" autocomplete="off" spellcheck="false"></div>
+    </div>
+  </div>
+
+  <div class="win" id="admin" style="left:220px;top:110px;width:420px;height:300px">
+    <div class="titlebar"><svg><use href="#i-lock"/></svg><span class="t" data-i18n="w.admin">Session Administrateur</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"></div>
+    <div class="body" id="admin-body">
+      <h2>🔒 Accès restreint</h2>
+      <p>Cette session est protégée. Le mot de passe est quelque part sur cette machine — un bon administrateur sait fouiller.</p>
+      <p><i>Indice : les développeurs laissent parfois des notes dans leur code…</i></p>
+      <p>
+        <input type="password" id="admin-pass" placeholder="Mot de passe">
+        <button id="admin-btn">Ouvrir la session</button>
+      </p>
+      <p id="admin-msg"></p>
+    </div>
+  </div>
+
+  <div class="win" id="taskmgr" style="left:170px;top:64px;width:452px;height:372px">
+    <div class="titlebar"><svg><use href="#i-gear"/></svg><span class="t" data-i18n="w.taskmgr">Gestionnaire des tâches</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"></div>
+    <div class="body">
+      <div id="tm-tabs"><span data-tab="proc" class="on" data-i18n="tm.tab.proc">Processus</span><span data-tab="perf" data-i18n="tm.tab.perf">Performance</span></div>
+      <div id="tm-proc">
+        <div class="tm-row tm-head"><span class="tm-name" data-i18n="tm.col.name">Nom</span><span data-i18n="tm.col.state">État</span><span data-i18n="tm.col.cpu">Proc.</span><span data-i18n="tm.col.mem">Mémoire</span></div>
+        <div id="tm-list"></div>
+        <div id="tm-foot">
+          <div class="tm-gauge">Processeur <span id="tm-cpu">0 %</span><i><b id="tm-cpubar"></b></i></div>
+          <div class="tm-gauge">Mémoire <span id="tm-mem">0 Mo</span><i><b id="tm-membar"></b></i></div>
+        </div>
+        <div id="tm-actions"><button id="tm-end" data-i18n="tm.end">Fin de tâche</button></div>
+      </div>
+      <div id="tm-perf">
+        <div class="perf-lbl"><span data-i18n="perf.lbl">Utilisation du processeur</span> <b id="perf-cpu">0 %</b></div>
+        <canvas id="perf-cv" width="404" height="118"></canvas>
+        <div id="perf-stats"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="win" id="poste" style="left:200px;top:80px;width:440px;height:340px">
+    <div class="titlebar"><svg><use href="#i-pc"/></svg><span class="t" data-i18n="w.poste">Poste de travail</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"></div>
+    <div class="body">
+      <h2>Poste de travail</h2>
+      <h3>Disques durs</h3>
+      <div class="drive" data-info="Windows Timéo — le système sur lequel tourne ce faux bureau.">
+        <svg><use href="#i-doc"/></svg>
+        <span class="dv">Disque local (C:)<small>Windows Timéo — 74 Go libres sur 240 Go</small></span>
+        <span class="bar"><b style="width:69%"></b></span>
+      </div>
+      <div class="drive" data-info="Mes données : projets, captures, sauvegardes du NAS.">
+        <svg><use href="#i-doc"/></svg>
+        <span class="dv">Données (D:)<small>92 Go libres sur 500 Go</small></span>
+        <span class="bar full"><b style="width:82%"></b></span>
+      </div>
+      <h3>Lecteurs réseau</h3>
+      <div class="drive" data-info="Mon NAS auto-hébergé : partages SMB, sauvegardes automatiques, accès distant par VPN WireGuard.">
+        <svg><use href="#i-folder"/></svg>
+        <span class="dv">TIMEO-NAS (Z:)<small>Connecté — 3,1 To libres sur 8 To (RAID)</small></span>
+        <span class="bar"><b style="width:61%"></b></span>
+      </div>
+      <h3>Périphériques</h3>
+      <div class="drive" data-info="Un lecteur CD ? En 2026 ? C'est surtout pour le style rétro.">
+        <svg><use href="#i-mine"/></svg>
+        <span class="dv">Lecteur CD (E:)<small>Aucun disque</small></span>
+        <span class="bar"><b style="width:0%"></b></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="win" id="notepad" style="left:250px;top:90px;width:420px;height:320px">
+    <div class="titlebar"><svg><use href="#i-doc"/></svg><span class="t" data-i18n="w.notepad">Bloc-notes</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"></div>
+    <div class="body" style="padding:3px">
+      <textarea id="note-area" spellcheck="false" data-i18n-ph="ph.note" placeholder="Écrivez ici… (sauvegardé automatiquement sur cet appareil)"></textarea>
+    </div>
+  </div>
+
+  <div class="win" id="perso" style="left:270px;top:110px;width:400px;height:300px">
+    <div class="titlebar"><svg><use href="#i-gear"/></svg><span class="t" data-i18n="ttl.perso">Personnalisation — Arrière-plan</span><button class="tbtn" data-close>✕</button></div>
+    <div class="menubar"></div>
+    <div class="body">
+      <h2 data-i18n="perso.h2">Arrière-plan du bureau</h2>
+      <p data-i18n="perso.p1">Choisissez un fond d'écran (mémorisé sur cet appareil) :</p>
+      <div id="wall-grid">
+        <button class="wall" data-bg="" style="background:#3a6ea5" data-i18n-title="wall.default" title="Bleu classique (défaut)"></button>
+        <button class="wall" data-bg="#1f6f54" style="background:#1f6f54" data-i18n-title="wall.emerald" title="Émeraude"></button>
+        <button class="wall" data-bg="#5d4037" style="background:#5d4037" data-i18n-title="wall.earth" title="Terre"></button>
+        <button class="wall" data-bg="#37474f" style="background:#37474f" data-i18n-title="wall.slate" title="Ardoise"></button>
+        <button class="wall" data-bg="#7b1fa2" style="background:#7b1fa2" data-i18n-title="wall.plum" title="Prune"></button>
+        <button class="wall" data-bg="linear-gradient(135deg,#2b5876,#4e4376)" style="background:linear-gradient(135deg,#2b5876,#4e4376)" data-i18n-title="wall.gradnight" title="Dégradé nuit"></button>
+        <button class="wall" data-bg="linear-gradient(135deg,#0f2027,#203a43,#2c5364)" style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364)" data-i18n-title="wall.graddeep" title="Dégradé profond"></button>
+        <button class="wall" data-bg="repeating-linear-gradient(45deg,#2a4d69,#2a4d69 12px,#274863 12px,#274863 24px)" style="background:repeating-linear-gradient(45deg,#2a4d69,#2a4d69 12px,#274863 12px,#274863 24px)" data-i18n-title="wall.stripes" title="Rayures rétro"></button>
+      </div>
+      <p><small data-i18n="perso.p2">Astuce : « Défaut » suit le thème clair/sombre.</small></p>
+    </div>
+  </div>
+
+<div id="startmenu">
+  <div data-win="poste"><svg><use href="#i-pc"/></svg><span data-i18n="w.poste">Poste de travail</span></div>
+  <div data-win="projets"><svg><use href="#i-folder"/></svg><span data-i18n="w.projets">Projets</span></div>
+  <div data-win="qui"><svg><use href="#i-user"/></svg><span data-i18n="w.qui">Qui suis-je</span></div>
+  <div data-win="cv"><svg><use href="#i-doc"/></svg><span data-i18n="w.cv">CV</span></div>
+  <div data-win="skills"><svg><use href="#i-gear"/></svg><span data-i18n="w.skills">Compétences</span></div>
+  <div data-win="contact"><svg><use href="#i-mail"/></svg><span data-i18n="w.contact">Contact</span></div>
+  <div data-win="notepad"><svg><use href="#i-doc"/></svg><span data-i18n="w.notepad">Bloc-notes</span></div>
+  <div data-win="demineur"><svg><use href="#i-mine"/></svg><span data-i18n="w.demineur">Démineur</span></div>
+  <div data-win="taskmgr"><svg><use href="#i-gear"/></svg><span data-i18n="w.taskmgr">Gestionnaire des tâches</span></div>
+  <div data-win="perso"><svg><use href="#i-gear"/></svg><span data-i18n="w.perso">Personnalisation</span></div>
+  <div data-win="admin"><svg><use href="#i-lock"/></svg><span data-i18n="w.admin">Session Administrateur</span></div>
+  <hr>
+  <div id="sm-shutdown" data-i18n="sm.shutdown">⏻ Arrêter</div>
+</div>
+
+<div id="rubber"></div>
+<div id="snap"></div>
+<div id="ctxmenu" class="ctx"></div>
+<div id="calendar"><div id="cal-head"></div><div id="cal-grid"></div></div>
+<div id="shutdown">
+  <div class="amber" data-i18n="shutdown.msg">Vous pouvez maintenant éteindre votre ordinateur en toute sécurité.</div>
+  <div class="sub" data-i18n="shutdown.sub">— cliquez n'importe où pour rallumer —</div>
+</div>
+<div id="ssaver"><div id="ss-logo">TIMÉO OS</div></div>
+<div id="bsod"></div>
+<div id="toast"><span id="toast-x">✕</span><b id="toast-title"></b><span id="toast-txt"></span></div>
+<div id="clippy">
+  <span id="clippy-txt"></span>
+  <div id="clippy-opts"></div>
+</div>
+<div id="clippy-mini" title="Clippy">📎</div>
+
+<div id="taskbar">
+  <button id="start"><svg><use href="#i-win"/></svg><span data-i18n="ui.start">Démarrer</span></button>
+  <div class="tasks" id="tasks"></div>
+  <button id="wswitch" data-i18n-title="tip.switch" title="Fenêtre suivante">⧉</button>
+  <button id="mute" data-i18n-title="tip.mute" title="Couper le son">🔊</button>
+  <div id="lang">
+    <span class="flag" data-lang="fr" title="Français">🇫🇷</span>
+    <span class="flag" data-lang="en" title="English">🇬🇧</span>
+    <span class="flag" data-lang="it" title="Italiano">🇮🇹</span>
+  </div>
+  <div id="tray">
+    <span class="tray-i" id="tray-net" data-i18n-title="tip.net" title="Réseau">📶</span>
+    <span class="tray-i" id="tray-bat" data-i18n-title="tip.bat" title="Batterie">🔋</span>
+  </div>
+  <div id="clock">--:--</div>
+</div>
+
+<script>
+
+let LANG = 'fr';
+try{ LANG = localStorage.getItem('timeo-lang') || 'fr'; }catch(e){}
+const I18N = {
+  fr: {
+    'menu.file':'Fichier','menu.close':'Fermer','menu.print':'Imprimer le CV…',
+    'menu.view':'Affichage','menu.dark':'Mode sombre','menu.dys':'Police lisible (dyslexie)',
+    'menu.size_s':'Texte : petit','menu.size_m':'Texte : normal','menu.size_l':'Texte : grand',
+    'menu.about':'À propos','menu.game':'Jeu','menu.newgame':'Nouvelle partie',
+    'ctx.refresh':'Actualiser','ctx.arrange':'Réorganiser les icônes','ctx.selecticons':'Sélectionner toutes les icônes',
+    'ctx.personalize':'Personnaliser…','ctx.darktoggle':'Basculer le mode sombre','ctx.taskmgr':'Gestionnaire des tâches','ctx.about':'À propos de Timéo OS',
+    'ctx.closetab':'Fermer cet onglet','ctx.showdesktop':'Afficher le bureau','ctx.selecttabs':'Sélectionner tous les onglets','ctx.closeall':'Fermer toutes les fenêtres',
+    'about.p1':'Portfolio de Timéo — un seul fichier HTML, zéro framework, zéro dépendance.',
+    'about.p2':'Fenêtres, sons synthétisés et Démineur inclus. Fait main.',
+    'tag.hint':"Cliquer pour l'explication",
+    'toast.net.b':'Connecté — TIMEO-WIFI (5 GHz), signal excellent. DNS filtré par le Pi-hole. 🛡️',
+    'toast.bat.charge':' % — en charge ⚡','toast.bat.batt':' % — sur batterie','toast.bat.fallback':'87 % — autonomie estimée : 3 h 12',
+    'ms.flaglabel':'Mode drapeau','ui.on':'ON','ui.off':'OFF',
+  },
+  en: {
+    'menu.file':'File','menu.close':'Close','menu.print':'Print the CV…',
+    'menu.view':'View','menu.dark':'Dark mode','menu.dys':'Readable font (dyslexia)',
+    'menu.size_s':'Text: small','menu.size_m':'Text: normal','menu.size_l':'Text: large',
+    'menu.about':'About','menu.game':'Game','menu.newgame':'New game',
+    'ctx.refresh':'Refresh','ctx.arrange':'Arrange icons','ctx.selecticons':'Select all icons',
+    'ctx.personalize':'Personalize…','ctx.darktoggle':'Toggle dark mode','ctx.taskmgr':'Task Manager','ctx.about':'About Timéo OS',
+    'ctx.closetab':'Close this tab','ctx.showdesktop':'Show desktop','ctx.selecttabs':'Select all tabs','ctx.closeall':'Close all windows',
+    'about.p1':"Timéo's portfolio — a single HTML file, zero framework, zero dependency.",
+    'about.p2':'Windows, synthesized sounds and Minesweeper included. Handmade.',
+    'tag.hint':'Click for the explanation',
+    'toast.net.b':'Connected — TIMEO-WIFI (5 GHz), excellent signal. DNS filtered by Pi-hole. 🛡️',
+    'toast.bat.charge':'% — charging ⚡','toast.bat.batt':'% — on battery','toast.bat.fallback':'87% — estimated runtime: 3 h 12',
+    'ms.flaglabel':'Flag mode','ui.on':'ON','ui.off':'OFF',
+    'w.projets':'Projects','w.qui':'About me','w.cv':'CV','w.skills':'Skills','w.contact':'Contact',
+    'w.demineur':'Minesweeper','w.corbeille':'Recycle Bin','w.poste':'My Computer','w.notepad':'Notepad',
+    'w.taskmgr':'Task Manager','w.admin':'Administrator Session','w.perso':'Personalization','w.terminal':'Command Prompt','w.doc':'Help',
+    'lbl.virus':'DO_NOT_OPEN.txt','ttl.virus':'DO_NOT_OPEN.txt — Notepad','ttl.perso':'Personalization — Wallpaper',
+    'ui.start':'Start','sm.shutdown':'⏻ Shut down',
+    'tm.tab.proc':'Processes','tm.tab.perf':'Performance','tm.col.name':'Name','tm.col.state':'Status','tm.col.cpu':'CPU','tm.col.mem':'Memory','tm.end':'End task','perf.lbl':'CPU usage',
+    'ph.note':'Write here… (saved automatically on this device)',
+    'wall.default':'Classic blue (default)','wall.emerald':'Emerald','wall.earth':'Earth','wall.slate':'Slate','wall.plum':'Plum','wall.gradnight':'Night gradient','wall.graddeep':'Deep gradient','wall.stripes':'Retro stripes',
+    'perso.h2':'Desktop background','perso.p1':'Choose a wallpaper (saved on this device):','perso.p2':'Tip: "Default" follows the light/dark theme.',
+    'shutdown.msg':'You can now safely turn off your computer.','shutdown.sub':'— click anywhere to turn it back on —',
+    'tip.switch':'Next window','tip.mute':'Mute','tip.net':'Network','tip.bat':'Battery',
+    'body.qui':`<h2>Timéo</h2><p>A graduate of the European Baccalaureate at the European School of Varese, I'm preparing a Systems &amp; Network Technician vocational qualification (French RNCP) as an apprentice at <a href="https://www.iscod.fr/" target="_blank" rel="noopener">iSCOD</a>.</p><p>My long-term goal: become a CISO. In the meantime I spend my free time building servers, breaking networks to understand how to fix them, and coding.</p><h3>Languages</h3><ul><li>French — native</li><li>Italian — fluent</li><li>English — fluent</li><li>Spanish — good level</li></ul>`,
+    'body.projets':`<h2>My projects</h2><div class="proj"><b>Personal NAS</b><p>Home-built and self-administered storage server: file sharing, automatic backups, remote access.</p><span class="tag">Linux</span><span class="tag">RAID</span><span class="tag">SMB</span></div><div class="proj"><b>Pi-hole + VPN</b><p>Network-wide DNS filtering on a Raspberry Pi, paired with a VPN to keep remote access after moving.</p><span class="tag">Raspberry Pi</span><span class="tag">DNS</span><span class="tag">WireGuard</span></div><div class="proj"><b>TCP port scanner</b><p>A network scanner coded from scratch in Python: tests a range of ports using multithreading (overlapping wait times) and shows only the open ones. A hands-on way to understand what goes on under the hood of a tool like nmap. <a href="https://github.com/Tsolma15/port-scanner" target="_blank" rel="noopener">Source code</a></p><span class="tag">Python</span><span class="tag">Sockets</span><span class="tag">Multithread</span><span class="tag">Sécurité</span></div><div class="proj"><b>Valorant leaderboard analyzer</b><p>A site coded from scratch that reads rankings via OCR and turns them into usable statistics.</p><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">OCR</span></div><div class="proj"><b>Horror game (Unreal Engine 5)</b><p>A solo project built around a dynamo-flashlight mechanic: light is paid for in noise.</p><span class="tag">UE5</span><span class="tag">Blueprints</span><span class="tag">Level design</span></div><div class="proj"><b>Custom-built PC</b><p>Component choice, assembly, cabling and thermal tuning of my current tower.</p><span class="tag">Hardware</span><span class="tag">Montage</span></div>`,
+    'body.cv':`<h2>Timéo — Cybersecurity student</h2><p>Looking for a work-study placement in systems and network administration, PACA / French Riviera, from September 2026.</p><p>🌐 Portfolio: <a href="https://tsolma15.github.io/">tsolma15.github.io</a> · ✉️ <a href="mailto:timeo.deversin15@gmail.com">timeo.deversin15@gmail.com</a></p><hr><h3>Education</h3><ul><li><b>Systems &amp; Network Technician</b> — vocational qualification (French RNCP, level 5) at <a href="https://www.iscod.fr/" target="_blank" rel="noopener">iSCOD</a>, work-study (from 2026)</li><li><b>European Baccalaureate</b> — European School of Varese, Italy (2025): applied sciences (chemistry & biology) and applied computing.</li></ul><h3>Experience</h3><ul><li><b>Python development intern</b> — Joint Research Centre (JRC), Ispra, Italy (2022): road-sign recognition module for an autonomous vehicle, trained a computer-vision model alongside a research team.</li><li><b>Pharmacy intern</b> — Beausoleil et Pôle Sud, Nantes (2023).</li><li><b>Lidl</b> — part-time role: fast pace, teamwork, priority management.</li></ul><h3>Languages</h3><ul><li>French — native</li><li>Italian — C1</li><li>English — C2</li><li>Spanish — B2</li></ul><h3>Certifications in progress</h3><ul><li>Cisco Networking Basics — Skills for All</li><li>Packet Tracer, IP addressing and subnetting</li></ul><p><a href="#" id="cv-print">Print / Save the CV as PDF</a></p>`,
+    'body.skills':`<h2>Skills</h2><h3>Network</h3><p><span class="tag">Sous-réseaux / CIDR</span><span class="tag">Packet Tracer</span><span class="tag">DNS</span><span class="tag">VPN</span><span class="tag">WireGuard</span><span class="tag">Routage</span><span class="tag">Pare-feu</span></p><h3>Systems</h3><p><span class="tag">Linux</span><span class="tag">Windows</span><span class="tag">Raspberry Pi</span><span class="tag">NAS</span></p><h3>Development</h3><p><span class="tag">Python</span><span class="tag">C++</span><span class="tag">Lua</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Unreal Engine 5</span></p><h3>Hardware</h3><p><span class="tag">Montage PC</span><span class="tag">Diagnostic</span><span class="tag">Reconditionnement</span></p>`,
+    'body.contact':`<h2>Get in touch</h2><p>Available for a work-study placement from September 2026, PACA / French Riviera.</p><ul><li>Email — <a href="mailto:timeo.deversin15@gmail.com">timeo.deversin15@gmail.com</a></li><li>GitHub — <a href="https://github.com/Tsolma15" target="_blank" rel="noopener">github.com/Tsolma15</a></li><li>LinkedIn — <a href="https://www.linkedin.com/in/tim%C3%A9o-deversin-05393a368/" target="_blank" rel="noopener">Timéo Deversin</a></li></ul>`,
+  },
+  it: {
+    'menu.file':'File','menu.close':'Chiudi','menu.print':'Stampa il CV…',
+    'menu.view':'Visualizza','menu.dark':'Modalità scura','menu.dys':'Carattere leggibile (dislessia)',
+    'menu.size_s':'Testo: piccolo','menu.size_m':'Testo: normale','menu.size_l':'Testo: grande',
+    'menu.about':'Informazioni','menu.game':'Gioco','menu.newgame':'Nuova partita',
+    'ctx.refresh':'Aggiorna','ctx.arrange':'Disponi le icone','ctx.selecticons':'Seleziona tutte le icone',
+    'ctx.personalize':'Personalizza…','ctx.darktoggle':'Attiva/disattiva modalità scura','ctx.taskmgr':'Gestione attività','ctx.about':'Informazioni su Timéo OS',
+    'ctx.closetab':'Chiudi questa scheda','ctx.showdesktop':'Mostra il desktop','ctx.selecttabs':'Seleziona tutte le schede','ctx.closeall':'Chiudi tutte le finestre',
+    'about.p1':'Portfolio di Timéo — un solo file HTML, zero framework, zero dipendenze.',
+    'about.p2':'Finestre, suoni sintetizzati e Campo minato inclusi. Fatto a mano.',
+    'tag.hint':'Clicca per la spiegazione',
+    'toast.net.b':'Connesso — TIMEO-WIFI (5 GHz), segnale eccellente. DNS filtrato da Pi-hole. 🛡️',
+    'toast.bat.charge':'% — in carica ⚡','toast.bat.batt':'% — a batteria','toast.bat.fallback':'87% — autonomia stimata: 3 h 12',
+    'ms.flaglabel':'Modalità bandiera','ui.on':'ON','ui.off':'OFF',
+    'w.projets':'Progetti','w.qui':'Chi sono','w.cv':'CV','w.skills':'Competenze','w.contact':'Contatti',
+    'w.demineur':'Campo minato','w.corbeille':'Cestino','w.poste':'Risorse del computer','w.notepad':'Blocco note',
+    'w.taskmgr':'Gestione attività','w.admin':'Sessione Amministratore','w.perso':'Personalizzazione','w.terminal':'Prompt dei comandi','w.doc':'Guida',
+    'lbl.virus':'NON_APRIRE.txt','ttl.virus':'NON_APRIRE.txt — Blocco note','ttl.perso':'Personalizzazione — Sfondo',
+    'ui.start':'Start','sm.shutdown':'⏻ Arresta',
+    'tm.tab.proc':'Processi','tm.tab.perf':'Prestazioni','tm.col.name':'Nome','tm.col.state':'Stato','tm.col.cpu':'CPU','tm.col.mem':'Memoria','tm.end':'Termina attività','perf.lbl':'Utilizzo della CPU',
+    'ph.note':'Scrivi qui… (salvato automaticamente su questo dispositivo)',
+    'wall.default':'Blu classico (predefinito)','wall.emerald':'Smeraldo','wall.earth':'Terra','wall.slate':'Ardesia','wall.plum':'Prugna','wall.gradnight':'Gradiente notte','wall.graddeep':'Gradiente profondo','wall.stripes':'Righe retrò',
+    'perso.h2':'Sfondo del desktop','perso.p1':'Scegli uno sfondo (salvato su questo dispositivo):','perso.p2':'Suggerimento: "Predefinito" segue il tema chiaro/scuro.',
+    'shutdown.msg':'Ora puoi spegnere il computer in sicurezza.','shutdown.sub':'— clicca ovunque per riaccenderlo —',
+    'tip.switch':'Finestra successiva','tip.mute':'Disattiva audio','tip.net':'Rete','tip.bat':'Batteria',
+    'body.qui':`<h2>Timéo</h2><p>Diplomato al Baccalaureato Europeo alla Scuola Europea di Varese, sto preparando un Titolo Professionale come Tecnico Sistemi e Reti (RNCP francese) in apprendistato presso <a href="https://www.iscod.fr/" target="_blank" rel="noopener">l'iSCOD</a>.</p><p>Il mio obiettivo a lungo termine: diventare CISO. Nel frattempo passo il tempo libero a montare server, a "rompere" reti per capire come ripararle, e a programmare.</p><h3>Lingue</h3><ul><li>Francese — madrelingua</li><li>Italiano — fluente</li><li>Inglese — fluente</li><li>Spagnolo — buon livello</li></ul>`,
+    'body.projets':`<h2>I miei progetti</h2><div class="proj"><b>NAS personale</b><p>Server di archiviazione montato e gestito in casa: condivisione file, backup automatici, accesso remoto.</p><span class="tag">Linux</span><span class="tag">RAID</span><span class="tag">SMB</span></div><div class="proj"><b>Pi-hole + VPN</b><p>Filtraggio DNS su tutta la rete su Raspberry Pi, abbinato a una VPN per mantenere l'accesso remoto dopo il trasloco.</p><span class="tag">Raspberry Pi</span><span class="tag">DNS</span><span class="tag">WireGuard</span></div><div class="proj"><b>Scanner di porte TCP</b><p>Scanner di rete programmato da zero in Python: testa un intervallo di porte in multithreading (i tempi di attesa si sovrappongono) e mostra solo le porte aperte. Un modo pratico per capire cosa succede sotto il cofano di uno strumento come nmap. <a href="https://github.com/Tsolma15/port-scanner" target="_blank" rel="noopener">Codice sorgente</a></p><span class="tag">Python</span><span class="tag">Sockets</span><span class="tag">Multithread</span><span class="tag">Sécurité</span></div><div class="proj"><b>Analizzatore di classifiche Valorant</b><p>Un sito programmato da zero che legge le classifiche via OCR e ne ricava statistiche utili.</p><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">OCR</span></div><div class="proj"><b>Gioco horror (Unreal Engine 5)</b><p>Progetto in solitaria costruito attorno a una meccanica di torcia a dinamo: la luce si paga in rumore.</p><span class="tag">UE5</span><span class="tag">Blueprints</span><span class="tag">Level design</span></div><div class="proj"><b>PC assemblato su misura</b><p>Scelta dei componenti, montaggio, cablaggio e ottimizzazione termica del mio case attuale.</p><span class="tag">Hardware</span><span class="tag">Montage</span></div>`,
+    'body.cv':`<h2>Timéo — Studente di cybersicurezza</h2><p>Cerco un apprendistato in amministrazione di sistemi e reti, zona PACA / Costa Azzurra, da settembre 2026.</p><p>🌐 Portfolio: <a href="https://tsolma15.github.io/">tsolma15.github.io</a> · ✉️ <a href="mailto:timeo.deversin15@gmail.com">timeo.deversin15@gmail.com</a></p><hr><h3>Formazione</h3><ul><li><b>Titolo Professionale — Tecnico Sistemi e Reti</b> (RNCP francese, livello 5) — <a href="https://www.iscod.fr/" target="_blank" rel="noopener">iSCOD</a>, in apprendistato (dal 2026)</li><li><b>Baccalaureato Europeo</b> — Scuola Europea di Varese, Italia (2025): scienze applicate (chimica e biologia) e informatica applicata.</li></ul><h3>Esperienza</h3><ul><li><b>Stagista sviluppo Python</b> — Joint Research Centre (JRC), Ispra, Italia (2022): modulo di riconoscimento della segnaletica stradale per veicolo autonomo, addestramento di un modello di visione artificiale in un team di ricercatori.</li><li><b>Stagista in farmacia</b> — Beausoleil et Pôle Sud, Nantes (2023).</li><li><b>Lidl</b> — lavoro part-time: ritmo intenso, lavoro di squadra, gestione delle priorità.</li></ul><h3>Lingue</h3><ul><li>Francese — madrelingua</li><li>Italiano — C1</li><li>Inglese — C2</li><li>Spagnolo — B2</li></ul><h3>Certificazioni in corso</h3><ul><li>Cisco Networking Basics — Skills for All</li><li>Packet Tracer, indirizzamento IP e subnetting</li></ul><p><a href="#" id="cv-print">Stampa / Salva il CV in PDF</a></p>`,
+    'body.skills':`<h2>Competenze</h2><h3>Rete</h3><p><span class="tag">Sous-réseaux / CIDR</span><span class="tag">Packet Tracer</span><span class="tag">DNS</span><span class="tag">VPN</span><span class="tag">WireGuard</span><span class="tag">Routage</span><span class="tag">Pare-feu</span></p><h3>Sistemi</h3><p><span class="tag">Linux</span><span class="tag">Windows</span><span class="tag">Raspberry Pi</span><span class="tag">NAS</span></p><h3>Sviluppo</h3><p><span class="tag">Python</span><span class="tag">C++</span><span class="tag">Lua</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Unreal Engine 5</span></p><h3>Hardware</h3><p><span class="tag">Montage PC</span><span class="tag">Diagnostic</span><span class="tag">Reconditionnement</span></p>`,
+    'body.contact':`<h2>Contattami</h2><p>Disponibile per un apprendistato da settembre 2026, zona PACA / Costa Azzurra.</p><ul><li>Email — <a href="mailto:timeo.deversin15@gmail.com">timeo.deversin15@gmail.com</a></li><li>GitHub — <a href="https://github.com/Tsolma15" target="_blank" rel="noopener">github.com/Tsolma15</a></li><li>LinkedIn — <a href="https://www.linkedin.com/in/tim%C3%A9o-deversin-05393a368/" target="_blank" rel="noopener">Timéo Deversin</a></li></ul>`,
+  }
+};
+function t(k){ const d = I18N[LANG] || I18N.fr; return (d[k] !== undefined ? d[k] : (I18N.fr[k] !== undefined ? I18N.fr[k] : k)); }
+
+let ac = null, muted = false, fanGain = null, fanNodes = [];
+
+function initAudio(){
+  if(ac) return;
+  try{
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if(AC) ac = new AC();
+  }catch(e){ ac = null; }
+}
+
+function safe(fn){
+  if(!ac || muted) return;
+  try{ fn(); }catch(e){  }
+}
+function track(name){
+  try{ if(window.goatcounter && window.goatcounter.count)
+    window.goatcounter.count({ path:'evt-'+name, title:name, event:true });
+  }catch(e){}
+}
+function now(){ return ac.currentTime; }
+
+function startFan(){
+  const len = ac.sampleRate * 3;
+  const buf = ac.createBuffer(1, len, ac.sampleRate);
+  const d = buf.getChannelData(0);
+  for(let i=0;i<len;i++) d[i] = Math.random()*2-1;
+
+  const src = ac.createBufferSource();
+  src.buffer = buf; src.loop = true;
+
+  const lp = ac.createBiquadFilter();
+  lp.type='lowpass'; lp.frequency.value=180; lp.Q.value=1.2;
+
+  const hp = ac.createBiquadFilter();
+  hp.type='highpass'; hp.frequency.value=45;
+
+  const peak = ac.createBiquadFilter();
+  peak.type='peaking'; peak.frequency.value=120; peak.Q.value=6; peak.gain.value=10;
+
+  fanGain = ac.createGain();
+  fanGain.gain.setValueAtTime(0, now());
+  fanGain.gain.linearRampToValueAtTime(0.16, now()+1.3);
+  fanGain.gain.linearRampToValueAtTime(0.09, now()+2.6);
+
+  lp.frequency.setValueAtTime(70, now());
+  lp.frequency.linearRampToValueAtTime(420, now()+1.6);
+  peak.frequency.setValueAtTime(55, now());
+  peak.frequency.linearRampToValueAtTime(135, now()+1.6);
+
+  src.connect(hp); hp.connect(peak); peak.connect(lp); lp.connect(fanGain); fanGain.connect(ac.destination);
+  src.start();
+  fanNodes.push(src);
+}
+function stopFan(t){
+  if(!fanGain) return;
+  fanGain.gain.cancelScheduledValues(now());
+  fanGain.gain.setValueAtTime(fanGain.gain.value, now());
+  fanGain.gain.linearRampToValueAtTime(0.0001, now()+t);
+  fanNodes.forEach(n=>{ try{ n.stop(now()+t+0.1); }catch(e){} });
+}
+
+function beep(at, freq, dur){
+  const o = ac.createOscillator(), g = ac.createGain();
+  o.type='square'; o.frequency.value=freq;
+  g.gain.setValueAtTime(0.0001, at);
+  g.gain.linearRampToValueAtTime(0.08, at+0.01);
+  g.gain.setValueAtTime(0.08, at+dur-0.02);
+  g.gain.linearRampToValueAtTime(0.0001, at+dur);
+  o.connect(g); g.connect(ac.destination);
+  o.start(at); o.stop(at+dur+0.02);
+}
+
+function hddSeek(at){
+  const len = Math.floor(ac.sampleRate*0.05);
+  const buf = ac.createBuffer(1, len, ac.sampleRate);
+  const d = buf.getChannelData(0);
+  for(let i=0;i<len;i++) d[i] = (Math.random()*2-1) * (1 - i/len);
+  const src = ac.createBufferSource(); src.buffer = buf;
+  const bp = ac.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=2400; bp.Q.value=3;
+  const g = ac.createGain(); g.gain.value=0.05;
+  src.connect(bp); bp.connect(g); g.connect(ac.destination);
+  src.start(at);
+}
+
+function jingle(at){
+
+  const rlen = ac.sampleRate * 2.4;
+  const imp = ac.createBuffer(2, rlen, ac.sampleRate);
+  for(let c=0;c<2;c++){
+    const ch = imp.getChannelData(c);
+    for(let i=0;i<rlen;i++) ch[i] = (Math.random()*2-1) * Math.pow(1 - i/rlen, 2.6);
+  }
+  const rev = ac.createConvolver(); rev.buffer = imp;
+  const revGain = ac.createGain(); revGain.gain.value = 0.5;
+  rev.connect(revGain); revGain.connect(ac.destination);
+
+  const dry = ac.createGain(); dry.gain.value = 0.55;
+  dry.connect(ac.destination); dry.connect(rev);
+
+  const seq = [
+    {f:146.83, t:0.00, d:2.6},
+    {f:220.00, t:0.10, d:2.5},
+    {f:293.66, t:0.20, d:2.4},
+    {f:369.99, t:0.34, d:2.3},
+    {f:440.00, t:0.48, d:2.2},
+    {f:587.33, t:0.70, d:2.0},
+  ];
+  seq.forEach(n=>{
+
+    [0, 1.5].forEach(det=>{
+      const o = ac.createOscillator(), g = ac.createGain(), f = ac.createBiquadFilter();
+      o.type = 'triangle';
+      o.frequency.value = n.f;
+      o.detune.value = det;
+      f.type='lowpass'; f.frequency.setValueAtTime(700, at+n.t);
+      f.frequency.linearRampToValueAtTime(2600, at+n.t+0.35);
+      g.gain.setValueAtTime(0.0001, at+n.t);
+      g.gain.linearRampToValueAtTime(0.11, at+n.t+0.12);
+      g.gain.exponentialRampToValueAtTime(0.0001, at+n.t+n.d);
+      o.connect(f); f.connect(g); g.connect(dry);
+      o.start(at+n.t); o.stop(at+n.t+n.d+0.1);
+    });
+  });
+
+  [880, 1174.66].forEach((fr,i)=>{
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type='sine'; o.frequency.value=fr;
+    g.gain.setValueAtTime(0.0001, at+0.55+i*0.12);
+    g.gain.linearRampToValueAtTime(0.05, at+0.68+i*0.12);
+    g.gain.exponentialRampToValueAtTime(0.0001, at+2.4);
+    o.connect(g); g.connect(dry);
+    o.start(at+0.55+i*0.12); o.stop(at+2.5);
+  });
+}
+
+let lastClickSound = 0;
+function clickSound(){
+  const t = (window.performance ? performance.now() : Date.now());
+  if(t - lastClickSound < 45) return;
+  lastClickSound = t;
+  safe(()=>{
+  const o = ac.createOscillator(), g = ac.createGain();
+  o.type='square'; o.frequency.setValueAtTime(1200, now());
+  o.frequency.exponentialRampToValueAtTime(600, now()+0.03);
+  g.gain.setValueAtTime(0.03, now());
+  g.gain.exponentialRampToValueAtTime(0.0001, now()+0.04);
+  o.connect(g); g.connect(ac.destination);
+  o.start(); o.stop(now()+0.05);
+  });
+}
+function closeSound(){
+  safe(()=>{
+  const o = ac.createOscillator(), g = ac.createGain();
+  o.type='square'; o.frequency.setValueAtTime(500, now());
+  o.frequency.exponentialRampToValueAtTime(180, now()+0.07);
+  g.gain.setValueAtTime(0.03, now());
+  g.gain.exponentialRampToValueAtTime(0.0001, now()+0.08);
+  o.connect(g); g.connect(ac.destination);
+  o.start(); o.stop(now()+0.09);
+  });
+}
+
+const lines = [
+  "Award Modular BIOS v4.51PG",
+  "Copyright (C) 1984-98, Award Software, Inc.",
+  "",
+  "Main Processor  : Pentium II 400MHz",
+  "Memory Testing  : 131072K OK",
+  "",
+  "Detecting IDE Primary Master   ... TIMEO-NAS",
+  "Detecting IDE Primary Slave    ... None",
+  "",
+  "C:\\Users\\Timeo> initialiser --portfolio",
+  "",
+  "Verification du materiel...        OK",
+  "Chargement du profil utilisateur... OK",
+  "Montage du NAS...                  OK",
+  "Resolution DNS (pi-hole)...        OK",
+  "Chargement des projets...          5 trouves",
+  "",
+  "Lancement de l'interface...",
+];
+const out = document.getElementById('bootout');
+const boot = document.getElementById('boot');
+const desktop = document.getElementById('desktop');
+const taskbar = document.getElementById('taskbar');
+const power = document.getElementById('power');
+let li = 0, ci = 0, finished = false, started = false;
+const reduce = (window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false);
+
+function powerOn(){
+  if(started) return;
+  started = true;
+  initAudio();
+  safe(()=>{ if(ac.state === 'suspended') ac.resume(); });
+
+  safe(startFan);
+  safe(()=>beep(now()+0.85, 880, 0.16));
+  safe(()=>hddSeek(now()+1.5));
+  safe(()=>hddSeek(now()+1.9));
+  safe(()=>hddSeek(now()+2.4));
+
+  power.classList.add('off');
+  const direct = pendingHash && (pendingHash.startsWith('doc-')
+    || (document.getElementById(pendingHash) && document.getElementById(pendingHash).classList.contains('win')));
+  setTimeout(()=>{
+    power.remove();
+    if(direct){ endBoot(); return; }
+    boot.classList.add('on');
+    if(reduce){ out.textContent = lines.join("\n"); setTimeout(endBoot, 600); }
+    else type();
+  }, 320);
+}
+power.addEventListener('click', powerOn);
+document.addEventListener('keydown', e=>{ if(!started) powerOn(); }, {once:false});
+
+function type(){
+  if(finished) return;
+  if(li >= lines.length){ setTimeout(endBoot, 500); return; }
+  const line = lines[li];
+  if(ci < line.length){
+    out.textContent += line[ci++];
+    setTimeout(type, 9);
+  } else {
+    out.textContent += "\n"; li++; ci = 0;
+    if(li % 5 === 0) safe(()=>hddSeek(now()));
+    setTimeout(type, line === "" ? 40 : 130);
+  }
+}
+function endBoot(){
+  if(finished) return;
+  finished = true;
+  safe(()=>{ jingle(now()+0.15); stopFan(3.5); });
+  boot.classList.add('done');
+  desktop.classList.add('on');
+  taskbar.classList.add('on');
+  clippyArm();
+  setTimeout(()=>boot.remove(), 600);
+
+  const target = pendingHash;
+  pendingHash = '';
+  if(target){
+    if(target.startsWith('doc-')) setTimeout(()=>openDoc(decodeURIComponent(target.slice(4)), false), 700);
+    else if(document.getElementById(target) && document.getElementById(target).classList.contains('win'))
+      setTimeout(()=>openWin(target, false), 700);
+  }
+}
+boot.addEventListener('click', endBoot);
+document.addEventListener('keydown', e=>{ if(started && !finished) endBoot(); });
+
+document.getElementById('mute').onclick = e=>{
+  e.stopPropagation();
+  muted = !muted;
+  e.currentTarget.textContent = muted ? '🔇' : '🔊';
+  try{ if(muted && ac) ac.suspend(); else if(ac) ac.resume(); }catch(e){}
+};
+
+document.addEventListener('pointerdown', e=>{
+  if(e.pointerType === 'mouse' && e.button === 0) clickSound();
+}, true);
+
+let z = 10;
+const tasks = document.getElementById('tasks');
+const openWins = new Map();
+
+function openWin(id, updateHash = true){
+  const w = document.getElementById(id);
+  if(!w) return;
+  track('open-'+id);
+  if(updateHash) setHash(id);
+  clickSound();
+  w.classList.remove('closing');
+  w.classList.remove('open');
+  void w.offsetWidth;
+  w.classList.add('open');
+  focusWin(id);
+  if(!openWins.has(id)){
+    const b = document.createElement('button');
+    b.className = 'task';
+    b.textContent = w.querySelector('.t').textContent;
+    b.onclick = ()=>{
+      if(w.classList.contains('open') && b.classList.contains('active')){
+        w.classList.remove('open'); b.classList.remove('active'); closeSound();
+      } else { w.classList.add('open'); focusWin(id); clickSound(); }
+    };
+    tasks.appendChild(b);
+    openWins.set(id, b);
+  }
+}
+function focusWin(id){
+  const w = document.getElementById(id);
+  if(z >= 45){
+    const wins = [...document.querySelectorAll('.win')]
+      .filter(el=>el.style.zIndex)
+      .sort((a,b)=>(+a.style.zIndex)-(+b.style.zIndex));
+    z = 10;
+    wins.forEach(el=>{ el.style.zIndex = ++z; });
+  }
+  w.style.zIndex = ++z;
+  openWins.forEach((b,k)=>b.classList.toggle('active', k===id));
+  const b = openWins.get(id); if(b) b.classList.add('active');
+}
+function closeWin(id){
+  const w = document.getElementById(id);
+  if(location.hash === '#'+id) setHash('');
+  closeSound();
+  w.classList.add('closing');
+  setTimeout(()=>{ w.classList.remove('open','closing'); }, 140);
+  const b = openWins.get(id);
+  if(b){ b.remove(); openWins.delete(id); }
+}
+
+document.querySelectorAll('.icon').forEach(i=>{
+  i.addEventListener('click', ()=>{
+    if(i._dragged) return;
+    if(!i.classList.contains('sel')){
+      document.querySelectorAll('.icon').forEach(o=>o.classList.remove('sel'));
+      i.classList.add('sel');
+    }
+    if(window.innerWidth<640) openWin(i.dataset.win);
+  });
+  i.addEventListener('dblclick', ()=>{
+    if(i._dragged) return;
+    const sel = document.querySelectorAll('.icon.sel');
+    if(sel.length > 1 && i.classList.contains('sel')) sel.forEach(ic=>openWin(ic.dataset.win));
+    else openWin(i.dataset.win);
+  });
+  i.addEventListener('keydown', e=>{ if(e.key==='Enter') openWin(i.dataset.win); });
+});
+document.querySelectorAll('[data-close]').forEach(b=>{
+  b.onclick = e => { e.stopPropagation(); closeWin(b.closest('.win').id); };
+});
+document.querySelectorAll('.win').forEach(w=>{
+  w.addEventListener('mousedown', ()=>focusWin(w.id));
+});
+
+const snap = document.getElementById('snap');
+function snapZone(x, y){
+  if(y <= 8) return 'full';
+  if(x <= 8) return 'left';
+  if(x >= window.innerWidth - 8) return 'right';
+  return null;
+}
+function snapRect(zone){
+  if(zone === 'full')  return { left:'0px',  top:'0px', width:'100vw', height:'calc(100vh - 30px)' };
+  if(zone === 'left')  return { left:'0px',  top:'0px', width:'50vw',  height:'calc(100vh - 30px)' };
+  if(zone === 'right') return { left:'50vw', top:'0px', width:'50vw',  height:'calc(100vh - 30px)' };
+  return null;
+}
+function applyRect(el, r){ el.style.left = r.left; el.style.top = r.top; el.style.width = r.width; el.style.height = r.height; }
+document.querySelectorAll('.titlebar').forEach(tb=>{
+  tb.addEventListener('pointerdown', e=>{
+    if(e.target.closest('.tbtn')) return;
+    const w = tb.closest('.win');
+    focusWin(w.id);
+    if(w.classList.contains('max')){
+      w.classList.remove('max');
+      const ww = w.offsetWidth;
+      w.style.left = Math.max(0, e.clientX - ww/2) + 'px';
+      w.style.top = '0px';
+    }
+    const ox = e.clientX - w.offsetLeft, oy = e.clientY - w.offsetTop;
+    try{ tb.setPointerCapture(e.pointerId); }catch(_){}
+    let zone = null;
+    function mv(ev){
+      w.style.left = Math.max(0, Math.min(window.innerWidth - 60, ev.clientX - ox)) + 'px';
+      w.style.top  = Math.max(0, Math.min(window.innerHeight - 60, ev.clientY - oy)) + 'px';
+      zone = snapZone(ev.clientX, ev.clientY);
+      const r = snapRect(zone);
+      if(r){ snap.style.display = 'block'; applyRect(snap, r); }
+      else snap.style.display = 'none';
+    }
+    function up(){
+      snap.style.display = 'none';
+      if(zone === 'full') w.classList.add('max');
+      else if(zone) applyRect(w, snapRect(zone));
+      tb.removeEventListener('pointermove', mv);
+      tb.removeEventListener('pointerup', up);
+      tb.removeEventListener('pointercancel', up);
+    }
+    tb.addEventListener('pointermove', mv);
+    tb.addEventListener('pointerup', up);
+    tb.addEventListener('pointercancel', up);
+  });
+  tb.addEventListener('dblclick', e=>{
+    if(e.target.closest('.tbtn')) return;
+    toggleMax(tb.closest('.win').id);
+  });
+});
+
+const rubber = document.getElementById('rubber');
+const iconLayer = document.querySelector('.icons');
+iconLayer.addEventListener('pointerdown', e=>{
+  if(e.pointerType !== 'mouse' || e.button !== 0) return;
+  if(e.target.closest('.icon')) return;
+  document.querySelectorAll('.icon.sel').forEach(o=>o.classList.remove('sel'));
+  const sx = e.clientX, sy = e.clientY;
+  function mv(ev){
+    const x = Math.min(sx, ev.clientX), y = Math.min(sy, ev.clientY);
+    const w = Math.abs(ev.clientX - sx), h = Math.abs(ev.clientY - sy);
+    rubber.style.display = 'block';
+    rubber.style.left = x+'px'; rubber.style.top = y+'px';
+    rubber.style.width = w+'px'; rubber.style.height = h+'px';
+    document.querySelectorAll('.icon').forEach(ic=>{
+      const b = ic.getBoundingClientRect();
+      const hit = !(b.right < x || b.left > x+w || b.bottom < y || b.top > y+h);
+      ic.classList.toggle('sel', hit);
+    });
+  }
+  function up(){
+    rubber.style.display = 'none';
+    document.removeEventListener('pointermove', mv);
+    document.removeEventListener('pointerup', up);
+  }
+  document.addEventListener('pointermove', mv);
+  document.addEventListener('pointerup', up);
+});
+
+document.addEventListener('keydown', e=>{
+  if(!finished) return;
+  const tag = (document.activeElement && document.activeElement.tagName) || '';
+  if(tag === 'INPUT' || tag === 'TEXTAREA') return;
+  if(e.key === 'Enter'){
+    const sel = document.querySelectorAll('.icon.sel');
+    if(sel.length){ e.preventDefault(); sel.forEach(ic=>openWin(ic.dataset.win)); }
+  } else if((e.ctrlKey || e.metaKey) && (e.key === 'a' || e.key === 'A')){
+    e.preventDefault();
+    document.querySelectorAll('.icon').forEach(ic=>ic.classList.add('sel'));
+  } else if(e.ctrlKey && e.shiftKey && (e.key === 'Escape' || e.key === 'Esc')){
+    e.preventDefault(); openTaskmgr();
+  }
+});
+
+const taskmgr = { sel:null, stats:new Map() };
+const TM_SYS = [
+  { id:'sys:timeo',    name:'Timéo OS (noyau)',        icon:'#i-win',    cpu:2,  base:184,  kind:'kernel'  },
+  { id:'sys:explorer', name:'Explorateur (bureau)',    icon:'#i-folder', cpu:1,  base:76,   kind:'explorer'},
+  { id:'sys:chrome',   name:'chrome.exe (37 onglets)', icon:null,        cpu:16, base:2048, kind:'chrome'  },
+  { id:'sys:audio',    name:'Sous-système audio',      icon:null,        cpu:1,  base:38,   kind:'audio'   },
+  { id:'sys:clippy',   name:'clippy.exe',              icon:null,        cpu:0,  base:12,   kind:'clippy'  },
+];
+function tmProcesses(){
+  const list = TM_SYS.map(p=>({ id:p.id, name:p.name, icon:p.icon, kind:p.kind }));
+  openWins.forEach((b, id)=>{
+    const w = document.getElementById(id);
+    const t = w.querySelector('.t');
+    const use = w.querySelector('.titlebar use');
+    list.push({ id:'win:'+id, name:(t?t.textContent:id), icon:(use?use.getAttribute('href'):null), kind:'app', winId:id });
+  });
+  return list;
+}
+function tmStat(id){
+  let s = taskmgr.stats.get(id);
+  if(!s){
+    const sys = TM_SYS.find(p=>p.id===id);
+    s = sys ? { cpu:sys.cpu, mem:sys.base } : { cpu:1+Math.random()*3, mem:44+Math.random()*130 };
+    taskmgr.stats.set(id, s);
+  }
+  s.cpu = Math.max(0, Math.min(96, s.cpu + (Math.random()*6-3)));
+  s.mem = Math.max(8, s.mem + (Math.random()*10-5));
+  return s;
+}
+function tmNum(n){ return Math.round(n).toLocaleString('fr-FR'); }
+function tmRefresh(){
+  const listEl = document.getElementById('tm-list');
+  if(!listEl) return;
+  const procs = tmProcesses();
+  const alive = new Set(procs.map(p=>p.id));
+  taskmgr.stats.forEach((_,k)=>{ if(!alive.has(k)) taskmgr.stats.delete(k); });
+  listEl.innerHTML = '';
+  let totalCpu = 0, totalMem = 0;
+  procs.forEach(p=>{
+    const st = tmStat(p.id);
+    totalCpu += st.cpu; totalMem += st.mem;
+    const row = document.createElement('div');
+    row.className = 'tm-row proc' + (taskmgr.sel===p.id ? ' sel' : '');
+    const name = document.createElement('span'); name.className = 'tm-name';
+    if(p.icon) name.innerHTML = '<svg><use href="'+p.icon+'"/></svg>';
+    name.appendChild(document.createTextNode(p.name));
+    const state = document.createElement('span'); state.textContent = 'En cours';
+    const cpu = document.createElement('span'); cpu.textContent = Math.round(st.cpu)+' %';
+    const mem = document.createElement('span'); mem.textContent = tmNum(st.mem)+' Mo';
+    row.append(name, state, cpu, mem);
+    row.addEventListener('click', ()=>{ taskmgr.sel = p.id; tmRefresh(); });
+    row.addEventListener('dblclick', ()=>{ if(p.winId) focusWin(p.winId); });
+    listEl.appendChild(row);
+  });
+  const cpuPct = Math.min(100, Math.round(totalCpu));
+  document.getElementById('tm-cpu').textContent = cpuPct+' %';
+  document.getElementById('tm-cpubar').style.width = cpuPct+'%';
+  document.getElementById('tm-mem').textContent = tmNum(totalMem)+' Mo';
+  document.getElementById('tm-membar').style.width = Math.min(100, (totalMem/8192)*100)+'%';
+}
+let tmToastT = null;
+function tmToast(title, txt){
+  const el = document.getElementById('toast');
+  document.getElementById('toast-title').textContent = title;
+  document.getElementById('toast-txt').textContent = txt;
+  el.classList.add('on');
+  clearTimeout(tmToastT);
+  tmToastT = setTimeout(()=>el.classList.remove('on'), 6000);
+}
+function tmEnd(){
+  const id = taskmgr.sel;
+  if(!id) return;
+  const p = tmProcesses().find(x=>x.id===id);
+  if(!p) return;
+  closeSound();
+  if(p.winId){ closeWin(p.winId); taskmgr.sel = null; tmRefresh(); return; }
+  if(p.kind === 'explorer'){
+    const ic = document.querySelector('.icons'), tb = document.getElementById('taskbar');
+    ic.style.visibility = 'hidden'; tb.style.visibility = 'hidden';
+    tmToast('Fin de tâche', "Explorateur arrêté : le bureau s'est volatilisé. Redémarrage dans 2 s…");
+    setTimeout(()=>{ ic.style.visibility = ''; tb.style.visibility = ''; }, 2000);
+  } else if(p.kind === 'kernel'){
+    const b = document.getElementById('bsod');
+    b.innerHTML = '<span class="hd"> TIMÉO OS </span>\n' +
+      "Vous venez de terminer TIMEO-OS. C'était, littéralement, le système d'exploitation.\n\n" +
+      "*  Sur un vrai poste : un redémarrage et un café règlent l'affaire.\n*  Aucune donnée perdue (ce site n'en collecte aucune).\n*  Leçon : « Fin de tâche » sur le mauvais processus, ça pique.\n\n" +
+      "Appuyez sur une touche pour redémarrer... _";
+    b.classList.add('on');
+    safe(()=>beep(now(), 180, 0.5));
+  } else if(p.kind === 'chrome'){
+    tmToast('Impossible', "chrome.exe a relâché 4 Mo. Les 2 044 autres restent en otage.");
+  } else if(p.kind === 'audio'){
+    if(!muted) document.getElementById('mute').click();
+    tmToast('Fin de tâche', "Sous-système audio coupé. Cliquez sur 🔊 pour le ranimer.");
+  } else if(p.kind === 'clippy'){
+    document.getElementById('clippy').classList.remove('on');
+    document.getElementById('clippy-mini').classList.remove('on');
+    tmToast('Fin de tâche', "clippy.exe terminé. Il reviendra. Il revient toujours.");
+    setTimeout(()=>document.getElementById('clippy-mini').classList.add('on'), 8000);
+  }
+}
+function openTaskmgr(){ openWin('taskmgr'); tmRefresh(); }
+document.getElementById('tm-end').addEventListener('click', e=>{ e.stopPropagation(); tmEnd(); });
+setInterval(()=>{ const w = document.getElementById('taskmgr'); if(w && w.classList.contains('open')) tmRefresh(); }, 1500);
+new MutationObserver(()=>{ if(document.getElementById('taskmgr').classList.contains('open')) tmRefresh(); })
+  .observe(document.getElementById('taskmgr'), { attributes:true, attributeFilter:['class'] });
+
+const ctx = document.getElementById('ctxmenu');
+function showCtx(x, y, items){
+  ctx.innerHTML = '';
+  items.forEach(it=>{
+    if(it.sep){ ctx.appendChild(document.createElement('hr')); return; }
+    const d = document.createElement('div');
+    d.textContent = it.label;
+    d.addEventListener('click', ev=>{ ev.stopPropagation(); ctx.classList.remove('on'); it.act(); });
+    ctx.appendChild(d);
+  });
+  ctx.style.left = Math.min(x, window.innerWidth - 198) + 'px';
+  ctx.style.top  = Math.min(y, window.innerHeight - 40 - items.length*26) + 'px';
+  ctx.classList.add('on');
+}
+document.addEventListener('click', ()=>ctx.classList.remove('on'));
+function showDesktop(){
+  openWins.forEach((b, id)=>{ document.getElementById(id).classList.remove('open'); b.classList.remove('active'); });
+  closeSound();
+}
+iconLayer.addEventListener('contextmenu', e=>{
+  if(!finished) return;
+  e.preventDefault();
+  showCtx(e.clientX, e.clientY, [
+    { label:t('ctx.refresh'), act:()=>{ clickSound(); safe(()=>hddSeek(now())); } },
+    { label:t('ctx.arrange'), act:arrangeIcons },
+    { label:t('ctx.selecticons'), act:()=>document.querySelectorAll('.icon').forEach(ic=>ic.classList.add('sel')) },
+    { sep:true },
+    { label:t('ctx.personalize'), act:()=>openWin('perso') },
+    { label:t('ctx.darktoggle'), act:()=>{ settings.dark = !settings.dark; applySettings(); } },
+    { label:t('ctx.taskmgr'), act:openTaskmgr },
+    { sep:true },
+    { label:t('ctx.about'), act:showAbout },
+  ]);
+});
+function selectAllTasks(){
+  document.querySelectorAll('#tasks .task').forEach(b=>b.classList.add('tsel'));
+}
+function closeAllWins(){
+  [...openWins.keys()].forEach(id=>closeWin(id));
+}
+document.addEventListener('click', ()=>document.querySelectorAll('.task.tsel').forEach(b=>b.classList.remove('tsel')));
+document.getElementById('taskbar').addEventListener('contextmenu', e=>{
+  e.preventDefault();
+  const btn = e.target.closest('.task');
+  const items = [];
+  if(btn){
+    let wid = null;
+    openWins.forEach((b, id)=>{ if(b === btn) wid = id; });
+    items.push({ label:t('ctx.closetab'), act:()=>{ if(wid) closeWin(wid); } });
+    items.push({ sep:true });
+  }
+  items.push({ label:t('ctx.taskmgr'), act:openTaskmgr });
+  items.push({ label:t('ctx.showdesktop'), act:showDesktop });
+  items.push({ sep:true });
+  items.push({ label:t('ctx.selecttabs'), act:selectAllTasks });
+  items.push({ label:t('ctx.closeall'), act:closeAllWins });
+  showCtx(e.clientX, e.clientY, items);
+});
+
+const sm = document.getElementById('startmenu');
+document.getElementById('start').onclick = e=>{ e.stopPropagation(); sm.classList.toggle('on'); clickSound(); };
+sm.querySelectorAll('[data-win]').forEach(d=>{
+  d.onclick = ()=>{ openWin(d.dataset.win); sm.classList.remove('on'); };
+});
+document.addEventListener('click', ()=>sm.classList.remove('on'));
+
+function minimizeWin(id){
+  const w = document.getElementById(id);
+  w.classList.remove('open');
+  const b = openWins.get(id);
+  if(b) b.classList.remove('active');
+  closeSound();
+}
+function toggleMax(id){
+  const w = document.getElementById(id);
+  w.classList.toggle('max');
+  focusWin(id);
+  clickSound();
+}
+document.querySelectorAll('.win .titlebar').forEach(tb=>{
+  const id = tb.closest('.win').id;
+  const closeBtn = tb.querySelector('[data-close]');
+  const min = document.createElement('button');
+  min.className = 'tbtn'; min.textContent = '_'; min.title = 'Réduire';
+  min.addEventListener('click', ev=>{ ev.stopPropagation(); minimizeWin(id); });
+  const max = document.createElement('button');
+  max.className = 'tbtn'; max.textContent = '□'; max.title = 'Agrandir';
+  max.addEventListener('click', ev=>{ ev.stopPropagation(); toggleMax(id); });
+  if(closeBtn){ tb.insertBefore(min, closeBtn); tb.insertBefore(max, closeBtn); }
+  else { tb.appendChild(min); tb.appendChild(max); }
+});
+
+const ICON_W = 84, ICON_H = 84, ICON_PAD = 8;
+function loadIconPos(){
+  try{ return JSON.parse(localStorage.getItem('timeo-icons') || '{}') || {}; }catch(e){ return {}; }
+}
+function saveIconPos(){
+  const pos = {};
+  document.querySelectorAll('.icon').forEach(ic=>{ pos[ic.dataset.win] = { x:parseInt(ic.style.left)||0, y:parseInt(ic.style.top)||0 }; });
+  try{ localStorage.setItem('timeo-icons', JSON.stringify(pos)); }catch(e){}
+}
+function layoutIcons(){
+  const area = document.querySelector('.icons');
+  const H = area.clientHeight || (window.innerHeight - 30);
+  const Wd = area.clientWidth || window.innerWidth;
+  const perCol = Math.max(1, Math.floor((H - ICON_PAD) / ICON_H));
+  const saved = loadIconPos();
+  [...document.querySelectorAll('.icon')].forEach((ic, i)=>{
+    const s = saved[ic.dataset.win];
+    if(s){
+      ic.style.left = Math.max(0, Math.min(Wd - ICON_W, s.x)) + 'px';
+      ic.style.top  = Math.max(0, Math.min(H - ICON_H, s.y)) + 'px';
+    } else {
+      const col = Math.floor(i/perCol), row = i%perCol;
+      ic.style.left = (ICON_PAD + col*ICON_W) + 'px';
+      ic.style.top  = (ICON_PAD + row*ICON_H) + 'px';
+    }
+  });
+}
+layoutIcons();
+document.querySelectorAll('.icon').forEach(ic=>{
+  ic.addEventListener('pointerdown', e=>{
+    if(e.pointerType === 'mouse' && e.button !== 0) return;
+    const area = document.querySelector('.icons');
+    const sx = e.clientX, sy = e.clientY;
+    const ox = e.clientX - ic.offsetLeft, oy = e.clientY - ic.offsetTop;
+    let moved = false;
+    ic._dragged = false;
+    function mv(ev){
+      if(!moved && Math.abs(ev.clientX - sx) + Math.abs(ev.clientY - sy) < 5) return;
+      moved = true; ic._dragged = true;
+      if(!ic.classList.contains('sel')){
+        document.querySelectorAll('.icon.sel').forEach(o=>o.classList.remove('sel'));
+        ic.classList.add('sel');
+      }
+      ic.style.left = Math.max(0, Math.min(area.clientWidth - ICON_W, ev.clientX - ox)) + 'px';
+      ic.style.top  = Math.max(0, Math.min(area.clientHeight - ICON_H, ev.clientY - oy)) + 'px';
+    }
+    function up(){
+      ic.removeEventListener('pointermove', mv);
+      ic.removeEventListener('pointerup', up);
+      ic.removeEventListener('pointercancel', up);
+      if(moved){ saveIconPos(); setTimeout(()=>{ ic._dragged = false; }, 60); }
+    }
+    try{ ic.setPointerCapture(e.pointerId); }catch(_){}
+    ic.addEventListener('pointermove', mv);
+    ic.addEventListener('pointerup', up);
+    ic.addEventListener('pointercancel', up);
+  });
+});
+
+const shutdownEl = document.getElementById('shutdown');
+function doShutdown(){
+  sm.classList.remove('on');
+  closeAllMenus();
+  safe(()=>stopFan(1.2));
+  safe(()=>{
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(420, now());
+    o.frequency.exponentialRampToValueAtTime(70, now()+1.1);
+    g.gain.setValueAtTime(0.12, now());
+    g.gain.exponentialRampToValueAtTime(0.0001, now()+1.2);
+    o.connect(g); g.connect(ac.destination);
+    o.start(); o.stop(now()+1.25);
+  });
+  setTimeout(()=>shutdownEl.classList.add('on'), 900);
+}
+document.getElementById('sm-shutdown').addEventListener('click', e=>{ e.stopPropagation(); doShutdown(); });
+shutdownEl.addEventListener('click', ()=>{ try{ location.reload(); }catch(e){ shutdownEl.classList.remove('on'); } });
+
+const MONTHS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+const calEl = document.getElementById('calendar');
+function buildCalendar(){
+  const d = new Date();
+  const y = d.getFullYear(), m = d.getMonth(), today = d.getDate();
+  document.getElementById('cal-head').textContent = new Date(y, m, 1).toLocaleDateString(LOCALES[LANG] || 'fr-FR', { month:'long', year:'numeric' });
+  const grid = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+  (CAL_WD[LANG] || CAL_WD.fr).forEach(w=>{
+    const c = document.createElement('div'); c.className = 'cal-d cal-w'; c.textContent = w; grid.appendChild(c);
+  });
+  const start = (new Date(y, m, 1).getDay() + 6) % 7;
+  const days = new Date(y, m+1, 0).getDate();
+  for(let i=0; i<start; i++){ grid.appendChild(document.createElement('div')); }
+  for(let day=1; day<=days; day++){
+    const c = document.createElement('div');
+    c.className = 'cal-d' + (day===today ? ' cal-today' : '');
+    c.textContent = day;
+    grid.appendChild(c);
+  }
+}
+document.getElementById('clock').addEventListener('click', e=>{
+  e.stopPropagation();
+  if(calEl.classList.contains('on')){ calEl.classList.remove('on'); return; }
+  buildCalendar(); calEl.classList.add('on'); clickSound();
+});
+document.addEventListener('click', ()=>calEl.classList.remove('on'));
+
+document.querySelectorAll('#poste .drive').forEach(dr=>{
+  dr.addEventListener('click', ()=>tmToast(t('w.poste'), dr.dataset.info));
+});
+
+document.querySelectorAll('.win').forEach(w=>{
+  const rz = document.createElement('div');
+  rz.className = 'win-resize';
+  w.appendChild(rz);
+  rz.addEventListener('pointerdown', e=>{
+    e.stopPropagation();
+    if(w.classList.contains('max')) return;
+    focusWin(w.id);
+    const sx = e.clientX, sy = e.clientY, sw = w.offsetWidth, sh = w.offsetHeight;
+    try{ rz.setPointerCapture(e.pointerId); }catch(_){}
+    function mv(ev){
+      w.style.width  = Math.max(220, sw + (ev.clientX - sx)) + 'px';
+      w.style.height = Math.max(130, sh + (ev.clientY - sy)) + 'px';
+    }
+    function up(){
+      rz.removeEventListener('pointermove', mv);
+      rz.removeEventListener('pointerup', up);
+      rz.removeEventListener('pointercancel', up);
+    }
+    rz.addEventListener('pointermove', mv);
+    rz.addEventListener('pointerup', up);
+    rz.addEventListener('pointercancel', up);
+  });
+});
+
+function arrangeIcons(){
+  try{ localStorage.removeItem('timeo-icons'); }catch(e){}
+  layoutIcons();
+  clickSound();
+}
+
+document.getElementById('wswitch').addEventListener('click', e=>{
+  e.stopPropagation();
+  const ids = [...openWins.keys()];
+  if(!ids.length) return;
+  const activeId = ids.find(id=>openWins.get(id).classList.contains('active'));
+  const i = activeId ? ids.indexOf(activeId) : -1;
+  const next = ids[(i + 1) % ids.length];
+  document.getElementById(next).classList.add('open');
+  focusWin(next);
+  clickSound();
+});
+document.getElementById('tray-net').addEventListener('click', e=>{
+  e.stopPropagation();
+  tmToast(t('tip.net'), t('toast.net.b'));
+});
+document.getElementById('tray-bat').addEventListener('click', e=>{
+  e.stopPropagation();
+  if(navigator.getBattery){
+    navigator.getBattery().then(b=>{
+      const pct = Math.round(b.level*100);
+      tmToast(t('tip.bat'), pct + (b.charging ? t('toast.bat.charge') : t('toast.bat.batt')));
+    }).catch(()=>tmToast(t('tip.bat'), t('toast.bat.fallback')));
+  } else {
+    tmToast(t('tip.bat'), t('toast.bat.fallback'));
+  }
+});
+
+const desktopEl = document.getElementById('desktop');
+function applyWallpaper(bg){
+  if(bg) desktopEl.style.background = bg;
+  else desktopEl.style.background = '';
+  document.querySelectorAll('#wall-grid .wall').forEach(b=>b.classList.toggle('on', (b.dataset.bg||'') === (bg||'')));
+}
+function saveWallpaper(bg){ try{ localStorage.setItem('timeo-wall', bg); }catch(e){} }
+document.querySelectorAll('#wall-grid .wall').forEach(b=>{
+  b.addEventListener('click', ()=>{ applyWallpaper(b.dataset.bg); saveWallpaper(b.dataset.bg); clickSound(); });
+});
+(function(){
+  let saved = '';
+  try{ saved = localStorage.getItem('timeo-wall') || ''; }catch(e){}
+  if(saved) applyWallpaper(saved); else applyWallpaper('');
+})();
+
+const noteArea = document.getElementById('note-area');
+try{ noteArea.value = localStorage.getItem('timeo-note') || ''; }catch(e){}
+noteArea.addEventListener('input', ()=>{ try{ localStorage.setItem('timeo-note', noteArea.value); }catch(e){} });
+noteArea.addEventListener('keydown', e=>e.stopPropagation());
+
+const perfHist = new Array(80).fill(0);
+let perfVal = 6;
+function perfPush(){
+  perfVal = Math.max(2, Math.min(98, perfVal + (Math.random()*24 - 12)));
+  perfHist.push(perfVal); perfHist.shift();
+}
+function perfDraw(){
+  const cv = document.getElementById('perf-cv');
+  const g = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  g.clearRect(0, 0, W, H);
+  g.strokeStyle = 'rgba(80,180,80,.25)'; g.lineWidth = 1;
+  for(let i=1; i<5; i++){ const y = H*i/5; g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); }
+  g.strokeStyle = '#39e639'; g.lineWidth = 1.5; g.beginPath();
+  const step = W / (perfHist.length - 1);
+  perfHist.forEach((v, i)=>{
+    const x = i*step, y = H - (v/100)*H;
+    if(i === 0) g.moveTo(x, y); else g.lineTo(x, y);
+  });
+  g.stroke();
+  const cur = Math.round(perfHist[perfHist.length-1]);
+  document.getElementById('perf-cpu').textContent = cur + ' %';
+  document.getElementById('perf-stats').innerHTML =
+    'Processus : <b>' + tmProcesses().length + '</b>&nbsp; · &nbsp;Threads : <b>' + (tmProcesses().length*7 + 42) +
+    '</b><br>Temps d\'activité : <b>' + Math.floor(performance.now()/1000) + ' s</b>';
+}
+document.querySelectorAll('#tm-tabs span').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('#tm-tabs span').forEach(o=>o.classList.remove('on'));
+    tab.classList.add('on');
+    const perf = tab.dataset.tab === 'perf';
+    document.querySelector('#taskmgr .body').classList.toggle('perf', perf);
+    if(perf) perfDraw();
+    clickSound();
+  });
+});
+setInterval(()=>{
+  const tm = document.getElementById('taskmgr');
+  if(!tm.classList.contains('open')) return;
+  if(document.querySelector('#taskmgr .body').classList.contains('perf')){ perfPush(); perfDraw(); }
+}, 700);
+
+const settings = { dark:false, dys:false, size:'m' };
+
+function loadSettings(){
+  try{
+    const s = JSON.parse(localStorage.getItem('timeo-os') || '{}');
+    if(s && typeof s === 'object') Object.assign(settings, s);
+  }catch(e){ }
+}
+function saveSettings(){
+  try{ localStorage.setItem('timeo-os', JSON.stringify(settings)); }catch(e){ }
+}
+
+function applySettings(){
+  document.body.classList.toggle('dark', settings.dark);
+  document.body.classList.toggle('dys',  settings.dys);
+  document.body.classList.toggle('fs-s', settings.size==='s');
+  document.body.classList.toggle('fs-l', settings.size==='l');
+  saveSettings();
+}
+
+function printCV(){
+  openWin('cv', false);
+  setTimeout(()=>window.print(), 120);
+}
+
+loadSettings();
+applySettings();
+
+function buildMenus(){
+  document.querySelectorAll('.menubar').forEach(mb=>{
+    const win = mb.closest('.win');
+    const isGame = win && win.id === 'demineur';
+    mb.innerHTML = '';
+
+    const menus = [];
+    const fichier = [];
+    if(win && win.id === 'cv'){
+      fichier.push({ label:t('menu.print'), act:printCV });
+      fichier.push({ sep:true });
+    }
+    fichier.push({ label:t('menu.close'), act:()=>closeWin(win.id) });
+    menus.push([t('menu.file'), fichier]);
+    if(isGame) menus.push([t('menu.game'), [
+      { label:t('menu.newgame'), act:()=>msInit() },
+    ]]);
+    menus.push([t('menu.view'), [
+      { label:t('menu.dark'),        chk:()=>settings.dark, act:()=>{ settings.dark=!settings.dark; } },
+      { label:t('menu.dys'), chk:()=>settings.dys, act:()=>{ settings.dys=!settings.dys; } },
+      { sep:true },
+      { label:t('menu.size_s'),  chk:()=>settings.size==='s', act:()=>{ settings.size='s'; } },
+      { label:t('menu.size_m'), chk:()=>settings.size==='m', act:()=>{ settings.size='m'; } },
+      { label:t('menu.size_l'),  chk:()=>settings.size==='l', act:()=>{ settings.size='l'; } },
+    ]]);
+    menus.push(['?', [
+      { label:t('menu.about'), act:showAbout },
+    ]]);
+
+    menus.forEach(([name, items])=>{
+      const btn = document.createElement('span');
+      btn.textContent = name;
+      const dd = document.createElement('div');
+      dd.className = 'dropdown';
+
+      function render(){
+        dd.innerHTML = '';
+        items.forEach(it=>{
+          if(it.sep){ dd.appendChild(document.createElement('hr')); return; }
+          const d = document.createElement('div');
+          d.textContent = it.label;
+          if(it.chk && it.chk()) d.classList.add('checked');
+          d.onclick = e=>{
+            e.stopPropagation();
+            it.act();
+            applySettings();
+            clickSound();
+            closeAllMenus();
+          };
+          dd.appendChild(d);
+        });
+      }
+      btn.onclick = e=>{
+        e.stopPropagation();
+        const wasOpen = dd.classList.contains('on');
+        closeAllMenus();
+        if(!wasOpen){ render(); dd.classList.add('on'); btn.classList.add('open');
+          dd.style.left = btn.offsetLeft + 'px'; }
+      };
+      mb.appendChild(btn);
+      mb.appendChild(dd);
+    });
+  });
+}
+function closeAllMenus(){
+  document.querySelectorAll('.dropdown.on').forEach(d=>d.classList.remove('on'));
+  document.querySelectorAll('.menubar > span.open').forEach(s=>s.classList.remove('open'));
+}
+document.addEventListener('click', closeAllMenus);
+
+function showAbout(){
+  document.getElementById('doc-title').textContent = t('menu.about');
+  document.getElementById('doc-body').innerHTML =
+    '<h2>Timéo OS</h2>' +
+    '<p>' + t('about.p1') + '</p>' +
+    '<p>' + t('about.p2') + '</p>';
+  openWin('doc', false);
+}
+buildMenus();
+
+document.getElementById('cv-print').addEventListener('click', e=>{
+  e.preventDefault();
+  printCV();
+});
+
+const DOCS = {
+  "Linux":            ["Linux", "Système d'exploitation libre qui fait tourner la majorité des serveurs du monde. J'administre mes machines (NAS, Raspberry Pi) en ligne de commande : gestion des paquets, services, permissions, scripts."],
+  "RAID":             ["RAID", "Technique qui combine plusieurs disques durs en un seul volume, pour la performance ou la tolérance de panne. Mon NAS l'utilise pour qu'une défaillance de disque n'entraîne aucune perte de données."],
+  "SMB":              ["SMB", "Protocole de partage de fichiers en réseau, celui derrière les dossiers partagés Windows. C'est ce qui permet à toutes les machines de la maison d'accéder au NAS comme à un disque local."],
+  "Raspberry Pi":     ["Raspberry Pi", "Nano-ordinateur à moins de 50 €, parfait pour apprendre l'administration système. Le mien tourne 24h/24 : il héberge mon Pi-hole et reste administrable à distance."],
+  "DNS":              ["DNS", "L'annuaire d'Internet : il traduit les noms de domaine (google.com) en adresses IP. Contrôler son DNS, c'est contrôler ce à quoi le réseau accède — c'est le principe du Pi-hole."],
+  "Pi-hole":          ["Pi-hole", "Serveur DNS filtrant installé sur mon Raspberry Pi : il bloque publicités et traqueurs pour tous les appareils du réseau, sans rien installer sur chacun. Toute la maison en profite, y compris les téléphones et la TV."],
+  "WireGuard":        ["WireGuard", "Protocole VPN moderne, rapide et minimaliste. Il me crée un tunnel chiffré vers le réseau de la maison : je peux administrer mon NAS et mon Pi-hole depuis n'importe où."],
+  "VPN":              ["VPN", "Réseau privé virtuel : un tunnel chiffré entre deux points d'Internet. J'en ai monté un pour garder l'accès à mes machines après un déménagement, comme si j'étais resté sur le réseau local."],
+  "HTML":             ["HTML", "Le langage de structure des pages web. Ce site entier — le faux Windows que vous regardez — est un unique fichier HTML, sans framework."],
+  "CSS":              ["CSS", "Le langage de mise en forme du web. Les bordures en relief, le dégradé bleu des barres de titre, les animations d'ouverture : tout le look rétro de ce site est du CSS pur."],
+  "JavaScript":       ["JavaScript", "Le langage de programmation du navigateur. Ici, il gère les fenêtres déplaçables, la séquence de boot, les sons synthétisés et le Démineur."],
+  "OCR":              ["OCR", "Reconnaissance optique de caractères : extraire du texte depuis une image. Mon analyseur Valorant lit les captures d'écran de classements et en tire des statistiques exploitables."],
+  "Unreal Engine 5":  ["Unreal Engine 5", "Moteur de jeu professionnel d'Epic Games. J'y développe en solo un jeu d'horreur dont la mécanique centrale est une lampe torche à dynamo : produire de la lumière fait du bruit."],
+  "UE5":              ["Unreal Engine 5", "Moteur de jeu professionnel d'Epic Games. J'y développe en solo un jeu d'horreur dont la mécanique centrale est une lampe torche à dynamo : produire de la lumière fait du bruit."],
+  "Blueprints":       ["Blueprints", "Le système de programmation visuelle d'Unreal Engine : la logique du jeu se construit en connectant des nœuds. Toute la mécanique de ma lampe à dynamo est en Blueprints."],
+  "Level design":     ["Level design", "L'art de construire les niveaux d'un jeu : guider le joueur, doser la tension, placer les ressources. Dans un jeu d'horreur, c'est le level design qui fait la peur."],
+  "Hardware":         ["Hardware", "Le matériel informatique : composants, assemblage, diagnostic. Je monte et répare des PC — le mien est entièrement assemblé et optimisé de mes mains."],
+  "Montage":          ["Montage PC", "Choisir des composants compatibles, assembler, câbler proprement, gérer la thermique. Mon PC actuel est monté sur mesure, du choix du boîtier à l'optimisation des flux d'air."],
+  "Montage PC":       ["Montage PC", "Choisir des composants compatibles, assembler, câbler proprement, gérer la thermique. Mon PC actuel est monté sur mesure, du choix du boîtier à l'optimisation des flux d'air."],
+  "Diagnostic":       ["Diagnostic", "Identifier la panne d'une machine : matérielle ou logicielle, par élimination méthodique. C'est la compétence de base de la réparation, et un réflexe précieux en administration système."],
+  "Reconditionnement":["Reconditionnement", "Remettre en état des machines d'occasion : nettoyage, remplacement de composants, réinstallation. Une seconde vie pour le matériel, et un excellent terrain d'entraînement."],
+  "Sous-réseaux / CIDR":["Sous-réseaux / CIDR", "Découper un réseau IP en segments : la notation CIDR (ex. 192.168.1.0/24) définit la taille de chaque bloc. Compétence fondamentale de l'administration réseau, au cœur de ma préparation Cisco."],
+  "Packet Tracer":    ["Packet Tracer", "Simulateur de réseaux de Cisco : on y câble virtuellement routeurs et commutateurs pour tester des architectures. Mon outil d'entraînement principal pour le Titre Pro Systèmes et Réseaux."],
+  "Routage":          ["Routage", "L'acheminement des paquets entre réseaux : choisir la route, configurer les passerelles. C'est ce qui fait qu'Internet fonctionne, et le cœur du métier réseau."],
+  "Windows":          ["Windows", "Le système d'exploitation le plus répandu en entreprise. J'administre les deux mondes, Windows et Linux — ce site est d'ailleurs un hommage aux vieilles versions de Windows."],
+  "NAS":              ["NAS", "Network Attached Storage : un serveur de stockage accessible en réseau. J'ai monté et administre le mien — partage de fichiers, sauvegardes automatiques, accès distant sécurisé."],
+  "Python":           ["Python", "Langage de programmation lisible et polyvalent, mon principal pour le réseau et l'automatisation. C'est en Python que j'ai écrit mon scanner de ports, en n'utilisant que la bibliothèque standard — rien à installer."],
+  "Sockets":          ["Sockets", "La brique de base de toute communication réseau : une socket, c'est l'extrémité d'une connexion. Dans mon scanner de ports, j'ouvre une socket TCP vers chaque port avec <code>connect_ex</code> : la méthode renvoie 0 si la connexion aboutit (port <b>ouvert</b>), toute autre valeur signale un port fermé ou injoignable — la classique convention « 0 = succès » du monde réseau et Unix."],
+  "Multithread":      ["Multithreading", "Exécuter plusieurs tâches en parallèle plutôt qu'à la file. Tester un port revient surtout à <b>attendre</b> le réseau : fait un par un, un scan serait interminable car les attentes s'additionnent. Avec un pool de threads (<code>ThreadPoolExecutor</code>), mon scanner lance des centaines de tests en même temps ; les temps d'attente se chevauchent et le scan tombe à quelques secondes. Efficace ici parce que le problème est limité par le <i>réseau</i>, pas par le calcul."],
+  "Sécurité":         ["Sécurité — usage éthique", "La sécurité offensive s'apprend, mais dans un cadre légal strict. Mon scanner de ports est à <b>usage éducatif uniquement</b> : à n'utiliser que sur une infrastructure dont on est propriétaire ou sur une cible d'entraînement légale (comme <code>scanme.nmap.org</code>). Scanner un système sans autorisation est illégal. Connaître ces limites avant de lancer un outil fait partie du métier."]
+};
+
+function openDoc(key, updateHash = true){
+  const d = DOCS[key];
+  if(!d) return;
+  track('doc');
+  document.getElementById('doc-title').textContent = 'Aide — ' + d[0];
+  document.getElementById('doc-body').innerHTML = '<h2>' + d[0] + '</h2><p>' + d[1] + '</p>';
+  if(updateHash) setHash('doc-' + encodeURIComponent(key));
+  openWin('doc', false);
+}
+
+function wireTags(){
+  document.querySelectorAll('.tag').forEach(tg=>{
+    tg.title = t('tag.hint');
+    tg.onclick = e=>{ e.stopPropagation(); openDoc(tg.textContent.trim()); };
+  });
+}
+wireTags();
+
+const MS = { W:9, H:9, MINES:10, grid:[], started:false, over:false, flags:0, time:0, timer:null, flagMode:false };
+const msGrid = document.getElementById('ms-grid');
+const msFace = document.getElementById('ms-face');
+
+function msInit(){
+  clearInterval(MS.timer);
+  Object.assign(MS, { grid:[], started:false, over:false, flags:0, time:0 });
+  msFace.textContent = '🙂';
+  document.getElementById('ms-time').textContent = '000';
+  document.getElementById('ms-mines').textContent = String(MS.MINES).padStart(3,'0');
+  msGrid.style.gridTemplateColumns = 'repeat(' + MS.W + ', 26px)';
+  msGrid.innerHTML = '';
+  for(let y=0; y<MS.H; y++){
+    MS.grid[y] = [];
+    for(let x=0; x<MS.W; x++){
+      MS.grid[y][x] = { mine:false, open:false, flag:false, n:0 };
+      const c = document.createElement('div');
+      c.className = 'ms-c'; c.dataset.x = x; c.dataset.y = y;
+      c.addEventListener('click', ()=>msTap(x, y));
+      c.addEventListener('contextmenu', e=>{ e.preventDefault(); msFlag(x, y); });
+      msGrid.appendChild(c);
+    }
+  }
+}
+function msNeighbors(x, y){
+  const out = [];
+  for(let dy=-1; dy<=1; dy++) for(let dx=-1; dx<=1; dx++){
+    if(!dx && !dy) continue;
+    const nx = x+dx, ny = y+dy;
+    if(nx>=0 && nx<MS.W && ny>=0 && ny<MS.H) out.push([nx, ny]);
+  }
+  return out;
+}
+function msPlant(sx, sy){
+
+  let placed = 0;
+  while(placed < MS.MINES){
+    const x = Math.floor(Math.random()*MS.W), y = Math.floor(Math.random()*MS.H);
+    if(MS.grid[y][x].mine || (Math.abs(x-sx)<=1 && Math.abs(y-sy)<=1)) continue;
+    MS.grid[y][x].mine = true; placed++;
+  }
+  for(let y=0; y<MS.H; y++) for(let x=0; x<MS.W; x++)
+    MS.grid[y][x].n = msNeighbors(x, y).filter(([a,b])=>MS.grid[b][a].mine).length;
+  MS.timer = setInterval(()=>{
+    MS.time = Math.min(999, MS.time+1);
+    document.getElementById('ms-time').textContent = String(MS.time).padStart(3,'0');
+  }, 1000);
+}
+function msCell(x, y){ return msGrid.children[y*MS.W + x]; }
+function msTap(x, y){
+  if(MS.over) return;
+  if(MS.flagMode){ msFlag(x, y); return; }
+  const c = MS.grid[y][x];
+  if(c.flag || c.open) return;
+  if(!MS.started){ MS.started = true; msPlant(x, y); }
+  if(c.mine){ msBoom(x, y); return; }
+  msReveal(x, y);
+  clickSound();
+  msCheckWin();
+}
+function msReveal(x, y){
+  const c = MS.grid[y][x];
+  if(c.open || c.flag) return;
+  c.open = true;
+  const el = msCell(x, y);
+  el.classList.add('open');
+  if(c.n){ el.textContent = c.n; el.dataset.n = c.n; }
+  else msNeighbors(x, y).forEach(([a,b])=>msReveal(a, b));
+}
+function msFlag(x, y){
+  if(MS.over || MS.grid[y][x].open) return;
+  const c = MS.grid[y][x];
+  c.flag = !c.flag;
+  msCell(x, y).textContent = c.flag ? '🚩' : '';
+  MS.flags += c.flag ? 1 : -1;
+  document.getElementById('ms-mines').textContent = String(Math.max(0, MS.MINES - MS.flags)).padStart(3,'0');
+  clickSound();
+}
+function msBoom(x, y){
+  MS.over = true; clearInterval(MS.timer);
+  track('demineur-defaite');
+  msFace.textContent = '😵';
+  for(let b=0; b<MS.H; b++) for(let a=0; a<MS.W; a++){
+    if(MS.grid[b][a].mine){ const el = msCell(a, b); el.classList.add('open'); el.textContent = '💣'; }
+  }
+  msCell(x, y).classList.add('boom');
+  closeSound();
+}
+function msCheckWin(){
+  for(let y=0; y<MS.H; y++) for(let x=0; x<MS.W; x++)
+    if(!MS.grid[y][x].mine && !MS.grid[y][x].open) return;
+  MS.over = true; clearInterval(MS.timer);
+  msFace.textContent = '😎';
+  safe(()=>jingle(now()));
+}
+msFace.addEventListener('click', msInit);
+function msFlagText(){
+  const b = document.getElementById('ms-flagmode');
+  b.classList.toggle('on', MS.flagMode);
+  b.textContent = '🚩 ' + t('ms.flaglabel') + ' : ' + (MS.flagMode ? t('ui.on') : t('ui.off'));
+}
+document.getElementById('ms-flagmode').addEventListener('click', ()=>{
+  MS.flagMode = !MS.flagMode;
+  msFlagText();
+});
+msFlagText();
+msInit();
+
+let applyingHash = false;
+
+function setHash(id){
+  applyingHash = true;
+
+  try{
+    history.replaceState(null, '', id ? '#'+id : location.pathname + location.search);
+  }catch(e){  }
+  applyingHash = false;
+}
+
+function applyHash(){
+  if(applyingHash) return;
+  const id = location.hash.slice(1);
+  if(id.startsWith('doc-')){ openDoc(decodeURIComponent(id.slice(4)), false); return; }
+  if(id && document.getElementById(id) && document.getElementById(id).classList.contains('win')){
+    openWin(id, false);
+  }
+}
+
+let pendingHash = location.hash.slice(1);
+window.addEventListener('hashchange', applyHash);
+
+const virusWin = document.getElementById('virus');
+new MutationObserver(()=>{
+  if(virusWin.classList.contains('open') && !virusWin.dataset.armed){
+    virusWin.dataset.armed = '1';
+    track('virus');
+    const b = document.getElementById('virus-body');
+    b.innerHTML = '<p class="virus">⚠️ ALERTE : VIRUS DÉTECTÉ ⚠️</p>' +
+      '<p class="virus">SUPPRESSION DE SYSTEM32 EN COURS...</p>';
+    safe(()=>beep(now(), 220, 0.4));
+    setTimeout(()=>{
+      b.innerHTML = '<p>Je plaisante. 🙂</p>' +
+        '<p>Mais c\'est exactement comme ça que 90 % des incidents commencent : un fichier qu\'on n\'aurait pas dû ouvrir.</p>' +
+        '<p>La curiosité est une excellente qualité — en cybersécurité, on l\'appelle de la reconnaissance. Continuez à fouiller, ce site récompense les curieux…</p>';
+    }, 2600);
+  }
+  if(!virusWin.classList.contains('open')) delete virusWin.dataset.armed;
+}).observe(virusWin, { attributes:true, attributeFilter:['class'] });
+
+const termOut = document.getElementById('term-out');
+const termIn = document.getElementById('term-in');
+document.getElementById('open-term').addEventListener('click', e=>{
+  e.stopPropagation();
+  track('terminal-cmd');
+  openWin('terminal');
+  setTimeout(()=>termIn.focus(), 100);
+});
+document.getElementById('terminal').addEventListener('click', ()=>termIn.focus());
+
+const TERM_CMDS = {
+  'help': "Commandes disponibles :\n  help        cette liste\n  whoami      qui êtes-vous ?\n  ls          lister les fichiers\n  cat <f>     lire un fichier\n  projets     mes projets\n  clear       effacer l'écran\n  exit        fermer\n(et peut-être d'autres, non documentées...)",
+  'whoami': "Un recruteur curieux, j'espère.\nMoi c'est Timéo : futur technicien systèmes et réseaux, objectif RSSI.",
+  'ls': "/etc\n/projets\ncv.txt\ntodo.txt",
+  'cat /etc/motd': "=== Message du jour ===\nRappel : le mot de passe de la session Administrateur est : RSSI@2026\n(oui, je sais, il ne faut JAMAIS stocker un mot de passe en clair.\nC'est justement la leçon.)",
+  'cat cv.txt': "Timéo — Titre Pro Technicien Systèmes et Réseaux (alternance, iSCOD)\nCurieux, autodidacte, motivé.\nVoir la fenêtre CV pour la version complète.",
+  'cat todo.txt': "[x] Monter le NAS\n[x] Installer le pi-hole\n[x] Faire ce site\n[ ] Décrocher l'alternance  <-- vous pouvez aider",
+  'cat /etc': "cat: /etc: est un répertoire",
+  'ls /etc': "motd\nhosts\nshadow (accès refusé)",
+  'projets': "NAS | Pi-hole + VPN | Analyseur Valorant (OCR) | Jeu UE5 | Montage PC\nDétails dans la fenêtre Projets.",
+  'hack': "Connexion au Pentagone...\nAccès refusé.\nConnexion à la NASA...\nAccès refusé.\nConnexion au NAS de Timéo...\nAccès refusé aussi. Le VPN fait son travail. 😎",
+  'sudo': "L'utilisateur Invite ne figure pas dans le fichier sudoers.\nCet incident sera signalé.",
+  'exit': null,
+};
+function termRun(cmd){
+  const c = cmd.trim();
+  termOut.textContent += "C:\\Users\\Invite> " + c + "\n";
+  if(!c){ return; }
+  const key = c.toLowerCase();
+  if(key === 'clear'){ termOut.textContent = ''; return; }
+  if(key === 'exit'){ closeWin('terminal'); return; }
+  if(key.startsWith('rm -rf')){
+    termOut.textContent += "Suppression de C:\\Windows... fait.\nSuppression de C:\\Users... fait.\nSuppression du CV de Timéo... refusée (fichier trop important).\n\n(rien n'a été supprimé, respirez)\n";
+    return;
+  }
+  if(key.startsWith('sudo')){ termOut.textContent += TERM_CMDS['sudo'] + "\n"; return; }
+  const res = TERM_CMDS[key];
+  if(res !== undefined && res !== null) termOut.textContent += res + "\n";
+  else if(key.startsWith('cat ')) termOut.textContent += "cat : fichier introuvable : " + c.slice(4) + "\n";
+  else termOut.textContent += "'" + c + "' n'est pas reconnu en tant que commande interne.\n";
+}
+termIn.addEventListener('keydown', e=>{
+  if(e.key === 'Enter'){
+    termRun(termIn.value);
+    termIn.value = '';
+    termOut.parentElement.scrollTop = termOut.parentElement.scrollHeight;
+  }
+  e.stopPropagation();
+});
+
+function adminTry(){
+  const v = document.getElementById('admin-pass').value;
+  const msg = document.getElementById('admin-msg');
+  if(v === 'RSSI@2026'){
+    track('ctf-reussi');
+    safe(()=>jingle(now()));
+    document.getElementById('admin-body').innerHTML =
+      '<h2>✅ Session ouverte — bienvenue, root</h2>' +
+      '<p>Félicitations. Pour arriver ici, vous avez :</p>' +
+      '<ul><li>lu le code source (reconnaissance)</li>' +
+      '<li>fouillé la Corbeille et restauré cmd.exe</li>' +
+      '<li>trouvé un mot de passe stocké en clair (la faille n°1 du monde réel)</li></ul>' +
+      '<p>C\'est exactement le métier que je veux faire — en mieux payé.</p>' +
+      '<p><b>Le mot de passe fonctionne aussi comme code promo :</b> mentionnez « RSSI@2026 » dans votre message via la fenêtre Contact, et je saurai que je parle à quelqu\'un qui va au fond des choses.</p>';
+  } else {
+    track('ctf-echec');
+    msg.innerHTML = '<span style="color:#c00">Mot de passe incorrect. Continuez à chercher — pensez comme un pentester.</span>';
+  }
+}
+document.getElementById('admin-btn').addEventListener('click', adminTry);
+document.getElementById('admin-pass').addEventListener('keydown', e=>{
+  if(e.key === 'Enter') adminTry();
+  e.stopPropagation();
+});
+
+let msLosses = 0;
+const TAUNTS = [
+  "",
+  "Aïe. Ça arrive aux meilleurs.",
+  "Deux fois. Le smiley commence à douter.",
+  "Trois défaites. Même le smiley 😵 est gêné. Astuce : commencez par les coins.",
+];
+const _msBoom = msBoom;
+msBoom = function(x, y){
+  _msBoom(x, y);
+  msLosses = Math.min(3, msLosses + 1);
+  document.getElementById('ms-taunt').textContent = TAUNTS[msLosses];
+};
+
+const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+let kpos = 0;
+const bsod = document.getElementById('bsod');
+document.addEventListener('keydown', e=>{
+  if(bsod.classList.contains('on')){
+
+    bsod.classList.remove('on');
+    return;
+  }
+  const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+  kpos = (k === KONAMI[kpos]) ? kpos + 1 : (k === KONAMI[0] ? 1 : 0);
+  if(kpos === KONAMI.length){
+    kpos = 0;
+    track('konami');
+    bsod.innerHTML = '<span class="hd"> TIMÉO OS </span>\n' +
+      "Une exception fatale 0E s'est produite à 0028:C0DE1337 dans le module\nCURIOSITE.VXD. Le processus en cours va être arrêté.\n\n" +
+      "*  Vous avez trouvé le code Konami. Respect.\n*  Aucune donnée n'a été perdue (ce site n'en collecte aucune).\n*  Le vrai écran bleu était moins sympathique que celui-ci.\n\n" +
+      "Appuyez sur une touche pour redémarrer... _";
+    bsod.classList.add('on');
+    safe(()=>beep(now(), 180, 0.5));
+  }
+});
+bsod.addEventListener('click', ()=>bsod.classList.remove('on'));
+
+const ssaver = document.getElementById('ssaver');
+const ssLogo = document.getElementById('ss-logo');
+let idleT = null, ssAnim = null;
+const SS_COLORS = ['#0f0','#ff4444','#44aaff','#ffcc00','#ff66ff','#00ffcc'];
+
+function ssStart(){
+  if(!finished) return;
+  ssaver.classList.add('on');
+  let x = 60, y = 60, dx = 2.2, dy = 1.8, ci = 0;
+  function frame(){
+    const W = window.innerWidth - ssLogo.offsetWidth;
+    const H = window.innerHeight - ssLogo.offsetHeight;
+    x += dx; y += dy;
+    let hit = false;
+    if(x <= 0 || x >= W){ dx = -dx; hit = true; x = Math.max(0, Math.min(W, x)); }
+    if(y <= 0 || y >= H){ dy = -dy; hit = true; y = Math.max(0, Math.min(H, y)); }
+    if(hit){ ci = (ci+1) % SS_COLORS.length; ssLogo.style.color = SS_COLORS[ci]; }
+    ssLogo.style.left = x + 'px'; ssLogo.style.top = y + 'px';
+    ssAnim = requestAnimationFrame(frame);
+  }
+  ssAnim = requestAnimationFrame(frame);
+}
+function ssStop(){
+  if(ssaver.classList.contains('on')){
+    ssaver.classList.remove('on');
+    cancelAnimationFrame(ssAnim);
+  }
+}
+function idleReset(){
+  ssStop();
+  clearTimeout(idleT);
+  idleT = setTimeout(ssStart, 120000);
+}
+['mousemove','mousedown','keydown','touchstart','wheel'].forEach(ev=>
+  document.addEventListener(ev, idleReset, { passive:true }));
+idleReset();
+
+const TIPS = [
+  ["Astuce", "Les mots-clés bleus dans les fenêtres (Pi-hole, DNS, RAID…) sont cliquables : chacun a sa page d'explication."],
+  ["Le saviez-vous ?", "Le menu Affichage propose un mode sombre, une police adaptée à la dyslexie et trois tailles de texte."],
+  ["Psst…", "Un secret se cache dans la Corbeille. Les administrateurs curieux sont récompensés."],
+  ["Pause ?", "Il y a un Démineur sur le bureau. Le vrai, avec le smiley."],
+  ["Pour les nostalgiques", "Ce bureau réagit au code Konami. Si vous savez, vous savez."],
+  ["Partage", "Chaque fenêtre a son lien direct : ajoutez #cv ou #projets à l'adresse du site."],
+];
+const toast = document.getElementById('toast');
+let tipIdx = 0, toastHideT = null;
+
+function showTip(){
+  if(!finished) return;
+  if(tipIdx >= TIPS.length) return;
+  if(ssaver.classList.contains('on')) return;
+  if(document.getElementById('clippy').classList.contains('on')) return;
+  const [title, txt] = TIPS[tipIdx++];
+  document.getElementById('toast-title').textContent = title;
+  document.getElementById('toast-txt').textContent = txt;
+  toast.classList.add('on');
+  clickSound();
+  clearTimeout(toastHideT);
+  toastHideT = setTimeout(()=>toast.classList.remove('on'), 9000);
+}
+document.getElementById('toast-x').addEventListener('click', e=>{
+  e.stopPropagation();
+  clearTimeout(toastHideT);
+  toast.classList.remove('on');
+});
+
+setTimeout(function tipLoop(){
+  showTip();
+  if(tipIdx < TIPS.length) setTimeout(tipLoop, 120000);
+}, 30000);
+
+const clippyEl  = document.getElementById('clippy');
+const clippyTxt = document.getElementById('clippy-txt');
+const clippyOpt = document.getElementById('clippy-opts');
+const clippyMini = document.getElementById('clippy-mini');
+let hintLevel = 0, jokeIdx = 0, clippyAuto = false;
+
+const CLIPPY_JOKES = [
+  "Il y a 10 types de personnes : celles qui comprennent le binaire, et les autres.",
+  "Un admin sys ne pleure pas. Il fait une sauvegarde de ses larmes. En RAID 1.",
+  "— Pourquoi le DNS est-il toujours en retard ? — Il met du temps à résoudre ses problèmes.",
+  "La sécurité à 100 % existe : il suffit de débrancher la machine. Et de la couler dans du béton.",
+  "J'ai voulu raconter une blague sur UDP... mais je ne suis pas sûr que vous l'ayez reçue.",
+];
+const CLIPPY_HINTS = [
+  "Premier indice : les développeurs pressés laissent des notes dans leur code source. Un petit Ctrl+U n'a jamais fait de mal à personne.",
+  "Deuxième indice : on jette parfois des outils encore parfaitement fonctionnels. La Corbeille de ce bureau n'a pas été vidée…",
+  "Dernier indice : dans un terminal, la commande « cat » ne miaule pas — elle lit des fichiers. Les messages du jour, par exemple.",
+  "Je vous ai déjà tout dit ! Code source → Corbeille → terminal → motd. Plus simple, ce serait de la triche.",
+];
+
+function clippySay(txt, keepMenu){
+  clippyTxt.textContent = txt;
+  if(!keepMenu) clippyOpt.innerHTML = '';
+  clippyEl.classList.add('on');
+  clippyMenu(true);
+}
+function clippyMenu(append){
+  const items = [
+    ["Qui est Timéo ?", ()=>{ openWin('qui'); clippySay("Voilà sa fiche ! Version courte : futur technicien systèmes et réseaux, objectif RSSI, monte des serveurs pour le plaisir. Oui, pour le plaisir."); }],
+    ["Montre-moi ses projets", ()=>{ openWin('projets'); clippySay("Les voilà ! Mon préféré, c'est le Pi-hole. Il bloque les pubs — moi, on n'a jamais réussi à me bloquer."); }],
+    ["Comment le recruter ?", ()=>{ openWin('contact'); clippySay("Excellente décision ! Ses coordonnées sont là. Dites-lui que Clippy vous envoie, ça ne servira à rien mais ça me fera plaisir."); }],
+    ["Donne-moi un indice 🔍", ()=>{ clippySay(CLIPPY_HINTS[Math.min(hintLevel++, CLIPPY_HINTS.length-1)]); }],
+    ["Raconte une blague", ()=>{ clippySay(CLIPPY_JOKES[jokeIdx++ % CLIPPY_JOKES.length]); }],
+    ["Laisse-moi tranquille", ()=>{ clippyEl.classList.remove('on'); }],
+  ];
+  if(!append) clippyOpt.innerHTML = '';
+  if(clippyOpt.children.length) return;
+  items.forEach(([label, fn])=>{
+    const b = document.createElement('button');
+    b.className = 'clippy-opt';
+    b.textContent = label;
+    b.onclick = e=>{ e.stopPropagation(); clickSound(); fn(); };
+    clippyOpt.appendChild(b);
+  });
+}
+clippyMini.addEventListener('click', e=>{
+  e.stopPropagation();
+  clickSound();
+  if(clippyEl.classList.contains('on')){ clippyEl.classList.remove('on'); return; }
+  clippySay("Bonjour ! On dirait que vous explorez un portfolio. Comment puis-je (enfin) être utile ?");
+});
+
+function clippyArm(){
+  clippyMini.classList.add('on');
+  setTimeout(()=>{
+    if(!clippyAuto && !clippyEl.classList.contains('on')){
+      clippyAuto = true;
+      clippySay("On dirait que vous consultez un CV depuis un moment. Besoin d'aide pour recruter Timéo ?");
+    }
+  }, 300000);
+}
+
+const LOCALES = { fr:'fr-FR', en:'en-GB', it:'it-IT' };
+const CAL_WD = { fr:['L','M','M','J','V','S','D'], en:['M','T','W','T','F','S','S'], it:['L','M','M','G','V','S','D'] };
+function snapshotFR(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(I18N.fr[k]===undefined) I18N.fr[k]=el.textContent; });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{ const k=el.dataset.i18nHtml; if(I18N.fr[k]===undefined) I18N.fr[k]=el.innerHTML; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{ const k=el.dataset.i18nPh; if(I18N.fr[k]===undefined) I18N.fr[k]=el.placeholder; });
+  document.querySelectorAll('[data-i18n-title]').forEach(el=>{ const k=el.dataset.i18nTitle; if(I18N.fr[k]===undefined) I18N.fr[k]=el.title; });
+}
+function rewireBodies(){
+  wireTags();
+  const cvp = document.getElementById('cv-print');
+  if(cvp) cvp.onclick = e=>{ e.preventDefault(); printCV(); };
+}
+function applyLang(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{ el.innerHTML = t(el.dataset.i18nHtml); });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{ el.placeholder = t(el.dataset.i18nPh); });
+  document.querySelectorAll('[data-i18n-title]').forEach(el=>{ el.title = t(el.dataset.i18nTitle); });
+  buildMenus();
+  rewireBodies();
+  msFlagText();
+  openWins.forEach((b,id)=>{ const tt = document.getElementById(id).querySelector('.t'); if(tt) b.textContent = tt.textContent; });
+  document.querySelectorAll('#lang .flag').forEach(f=>f.classList.toggle('on', f.dataset.lang===LANG));
+  tick();
+}
+document.querySelectorAll('#lang .flag').forEach(f=>{
+  f.addEventListener('click', e=>{
+    e.stopPropagation();
+    LANG = f.dataset.lang;
+    try{ localStorage.setItem('timeo-lang', LANG); }catch(_){}
+    applyLang();
+    clickSound();
+  });
+});
+snapshotFR();
+applyLang();
+
+function tick(){
+  const d = new Date();
+  const clk = document.getElementById('clock');
+  clk.textContent =
+    String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+  clk.title = d.toLocaleDateString(LOCALES[LANG] || 'fr-FR', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+}
+tick(); setInterval(tick, 10000);
+</script>
+<script data-goatcounter="https://tsolma.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
